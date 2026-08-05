@@ -24,12 +24,11 @@ function scramble(el, finalText, duration = 600) {
 const boot = document.getElementById('boot');
 const bootLog = document.getElementById('bootLog');
 const BOOT_LINES = [
-  '> booting cotoaleksandra v2.0 ...',
-  '> loading odd_ideas.pkg .......... OK',
-  '> mounting /projects ............. OK',
-  '> caffeine level ................. JEDNA KAWA ☕',
-  '> vibes ......................... IMMACULATE',
-  '> launching_',
+  '✳ dear reader, one moment —',
+  '✳ dusting the pixels .............. done',
+  '✳ warming up the whimsy ........... done',
+  '✳ brewing jedna kawa .............. ☕',
+  '✳ curtain up_',
 ];
 
 function endBoot() {
@@ -63,7 +62,7 @@ function runBoot() {
 // ---- hero ----
 const heroTitle = document.getElementById('heroTitle');
 const heroSub = document.getElementById('heroSub');
-const SUB_TEXT = 'builder of web apps, mobile apps & odd little tools — shipped fast on scrappy, (nearly) free infrastructure';
+const SUB_TEXT = 'apps, websites & other small inventions — dreamt up on a tram, shipped by the weekend';
 
 let heroInit = false;
 function initHero() {
