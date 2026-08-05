@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cotoaleksandra — Aleksandra builds apps & odd ideas</title>
+  <meta name="description" content="Aleksandra builds web apps, mobile apps, and playful tools — from travel apps to tarot sites to AI transcription.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦙</text></svg>">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav">
+    <a href="#top" class="nav-logo">coto<span class="nav-logo-dot">aleksandra</span></a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Say hi</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="top">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+    <p class="hero-kicker">👋 Cześć! I'm</p>
+    <h1 class="hero-title">
+      <span class="hero-line hero-line-accent">Aleksandra</span>
+    </h1>
+    <p class="hero-sub">I build <span class="squiggle">web apps</span>, <span class="squiggle squiggle-2">mobile apps</span>, and <span class="squiggle squiggle-3">playful tools</span> — shipped fast on scrappy, (nearly) free infrastructure.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">See my work <span class="btn-arrow">↓</span></a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </header>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>WEB APPS ✦ MOBILE APPS ✦ AI TOOLS ✦ SUPABASE ✦ REACT NATIVE ✦ VANILLA JS ✦ SHIPPED, NOT SHELVED ✦&nbsp;</span>
+      <span>WEB APPS ✦ MOBILE APPS ✦ AI TOOLS ✦ SUPABASE ✦ REACT NATIVE ✦ VANILLA JS ✦ SHIPPED, NOT SHELVED ✦&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="section" id="projects">
+    <h2 class="section-title">Things I've <span class="highlight">built</span></h2>
+    <p class="section-sub">A few favorites from the workshop.</p>
+
+    <div class="projects-grid">
+
+      <article class="project-card card-yellow">
+        <div class="project-emoji">🧜‍♀️</div>
+        <h3>Syrena Voyager</h3>
+        <p class="project-tag">iOS app · React Native + Firebase</p>
+        <p>An invite-only travel recommendation app — friends share their favorite spots around the world, beautifully mapped. Live on the App Store.</p>
+        <div class="project-chips">
+          <span>Expo</span><span>Firebase</span><span>App Store</span>
+        </div>
+      </article>
+
+      <article class="project-card card-purple">
+        <div class="project-emoji">🔮</div>
+        <h3>Tarocik</h3>
+        <p class="project-tag">Website · Vanilla JS</p>
+        <p>A bilingual Polish/English tarot site: a deterministic card of the day, three interactive spreads with shuffle & flip animations, and a full 78-card meanings library.</p>
+        <div class="project-chips">
+          <span>Bilingual</span><span>Animations</span><span>78 cards</span>
+        </div>
+      </article>
+
+      <article class="project-card card-green">
+        <div class="project-emoji">🎙️</div>
+        <h3>Transcriber</h3>
+        <p class="project-tag">AI tool · Gemini</p>
+        <p>Drop in a video or audio file, get a clean Polish or English transcript with timestamps — plus .txt and .srt downloads. Handles mixed speech and keeps every diacritic.</p>
+        <div class="project-chips">
+          <span>Gemini AI</span><span>SRT export</span><span>10+ formats</span>
+        </div>
+      </article>
+
+      <article class="project-card card-pink">
+        <div class="project-emoji">🦙</div>
+        <h3>AlpacApps Infra</h3>
+        <p class="project-tag">Starter template · Full-stack</p>
+        <p>My reusable playbook for full-stack business platforms: database, auth, email, SMS, and payments — all wired up on free or near-free infrastructure.</p>
+        <div class="project-chips">
+          <span>Supabase</span><span>GitHub Pages</span><span>~$0/mo</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section section-about" id="about">
+    <div class="about-inner">
+      <h2 class="section-title">About <span class="highlight highlight-2">me</span></h2>
+      <p class="about-text">
+        I'm a builder who likes shipping real things for real people — apps my friends and family
+        actually use. My happy place is taking an idea from "wouldn't it be fun if…" to a working
+        product in days, not months, using a lean stack of vanilla JS, Supabase, and a sprinkle of AI.
+      </p>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-num" data-count="10">0</span><span class="stat-label">projects shipped</span></div>
+        <div class="stat"><span class="stat-num" data-count="2">0</span><span class="stat-label">languages, PL & EN</span></div>
+        <div class="stat"><span class="stat-num" data-count="1">0</span><span class="stat-label">app on the App Store</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section section-contact" id="contact">
+    <h2 class="contact-title">Let's make<br>something <span class="highlight highlight-3">fun</span>.</h2>
+    <a href="mailto:cotoaleksandra@gmail.com" class="btn btn-big">cotoaleksandra@gmail.com ✉️</a>
+    <p class="contact-note">Or find me around the internet:</p>
+    <div class="contact-links">
+      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 cotoaleksandra · Built with vanilla HTML/CSS/JS and good vibes 🦙</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
