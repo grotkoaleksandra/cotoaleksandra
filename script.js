@@ -1,31 +1,19 @@
-// Reveal project cards as they scroll into view
-const cards = document.querySelectorAll('.project-card');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
+// Dateline — today's date, broadsheet style
+const dateline = document.getElementById('dateline');
+dateline.textContent = new Date()
+  .toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+  .toUpperCase();
+
+// Scroll reveal for exhibits and lab items
+document.documentElement.classList.add('reveal-ready');
+const targets = document.querySelectorAll('.exhibit, .labitem, .front__lead, .front__facts, .letters__mail');
+targets.forEach((el) => el.classList.add('reveal'));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 120);
-      revealObserver.unobserve(entry.target);
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.15 });
-cards.forEach((card) => revealObserver.observe(card));
-
-// Count-up animation for the stats
-const stats = document.querySelectorAll('.stat-num');
-const statObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = parseInt(el.dataset.count, 10);
-    const duration = 900;
-    const start = performance.now();
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      el.textContent = Math.round(target * progress);
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    statObserver.unobserve(el);
-  });
-}, { threshold: 0.5 });
-stats.forEach((el) => statObserver.observe(el));
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));

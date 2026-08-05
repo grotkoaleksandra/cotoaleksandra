@@ -3,130 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>cotoaleksandra — Aleksandra builds apps & odd ideas</title>
-  <meta name="description" content="Aleksandra builds web apps, mobile apps, and playful tools — from travel apps to tarot sites to AI transcription.">
+  <title>Aleksandra — cotoaleksandra · The Curiosity Edition</title>
+  <meta name="description" content="The personal record of Aleksandra — builder of apps and odd little tools. Selected works: Syrena Voyager, Tarocik, Transcriber, Olunia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦙</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗞️</text></svg>">
 </head>
 <body>
 
-  <!-- ===== NAV ===== -->
-  <nav class="nav">
-    <a href="#top" class="nav-logo">coto<span class="nav-logo-dot">aleksandra</span></a>
-    <div class="nav-links">
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact" class="nav-cta">Say hi</a>
+  <!-- ===== Masthead ===== -->
+  <header class="masthead">
+    <div class="masthead__topline franklin">
+      <span>POLAND / THE INTERNET</span>
+      <span>THE CURIOSITY EDITION</span>
+      <span>EST. 2026</span>
     </div>
-  </nav>
-
-  <!-- ===== HERO ===== -->
-  <header class="hero" id="top">
-    <div class="hero-blob hero-blob-1"></div>
-    <div class="hero-blob hero-blob-2"></div>
-    <div class="hero-blob hero-blob-3"></div>
-    <p class="hero-kicker">👋 Cześć! I'm</p>
-    <h1 class="hero-title">
-      <span class="hero-line hero-line-accent">Aleksandra</span>
-    </h1>
-    <p class="hero-sub">I build <span class="squiggle">web apps</span>, <span class="squiggle squiggle-2">mobile apps</span>, and <span class="squiggle squiggle-3">playful tools</span> — shipped fast on scrappy, (nearly) free infrastructure.</p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn btn-primary">See my work <span class="btn-arrow">↓</span></a>
-      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    <h1 class="masthead__title">Aleksandra</h1>
+    <p class="masthead__subtitle franklin">CO TO? — THE PERSONAL RECORD OF A BUILDER OF APPS &amp; ODD IDEAS</p>
+    <div class="masthead__dateline franklin">
+      <span id="dateline">—</span>
+      <span class="masthead__dot">•</span>
+      <span>VOL. I</span>
+      <span class="masthead__dot">•</span>
+      <span>SELECTED WORKS &amp; NOTES</span>
+      <span class="masthead__dot">•</span>
+      <span>PRICE: JEDNA KAWA ☕</span>
     </div>
   </header>
 
-  <!-- ===== MARQUEE ===== -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>WEB APPS ✦ MOBILE APPS ✦ AI TOOLS ✦ SUPABASE ✦ REACT NATIVE ✦ VANILLA JS ✦ SHIPPED, NOT SHELVED ✦&nbsp;</span>
-      <span>WEB APPS ✦ MOBILE APPS ✦ AI TOOLS ✦ SUPABASE ✦ REACT NATIVE ✦ VANILLA JS ✦ SHIPPED, NOT SHELVED ✦&nbsp;</span>
+  <!-- ===== Sticky nav ===== -->
+  <nav class="nav">
+    <a href="#top" class="nav__name">Aleksandra</a>
+    <div class="nav__links franklin">
+      <a href="#work">Exhibits</a>
+      <a href="#lab">The Lab</a>
+      <a href="#contact">Contact</a>
     </div>
-  </div>
+    <a href="#contact" class="nav__cta franklin">SAY CZEŚĆ</a>
+  </nav>
 
-  <!-- ===== PROJECTS ===== -->
-  <section class="section" id="projects">
-    <h2 class="section-title">Things I've <span class="highlight">built</span></h2>
-    <p class="section-sub">A few favorites from the workshop.</p>
+  <main id="top">
 
-    <div class="projects-grid">
-
-      <article class="project-card card-yellow">
-        <div class="project-emoji">🧜‍♀️</div>
-        <h3>Syrena Voyager</h3>
-        <p class="project-tag">iOS app · React Native + Firebase</p>
-        <p>An invite-only travel recommendation app — friends share their favorite spots around the world, beautifully mapped. Live on the App Store.</p>
-        <div class="project-chips">
-          <span>Expo</span><span>Firebase</span><span>App Store</span>
-        </div>
-      </article>
-
-      <article class="project-card card-purple">
-        <div class="project-emoji">🔮</div>
-        <h3>Tarocik</h3>
-        <p class="project-tag">Website · Vanilla JS</p>
-        <p>A bilingual Polish/English tarot site: a deterministic card of the day, three interactive spreads with shuffle & flip animations, and a full 78-card meanings library.</p>
-        <div class="project-chips">
-          <span>Bilingual</span><span>Animations</span><span>78 cards</span>
-        </div>
-      </article>
-
-      <article class="project-card card-green">
-        <div class="project-emoji">🎙️</div>
-        <h3>Transcriber</h3>
-        <p class="project-tag">AI tool · Gemini</p>
-        <p>Drop in a video or audio file, get a clean Polish or English transcript with timestamps — plus .txt and .srt downloads. Handles mixed speech and keeps every diacritic.</p>
-        <div class="project-chips">
-          <span>Gemini AI</span><span>SRT export</span><span>10+ formats</span>
-        </div>
-      </article>
-
-      <article class="project-card card-pink">
-        <div class="project-emoji">🦙</div>
-        <h3>AlpacApps Infra</h3>
-        <p class="project-tag">Starter template · Full-stack</p>
-        <p>My reusable playbook for full-stack business platforms: database, auth, email, SMS, and payments — all wired up on free or near-free infrastructure.</p>
-        <div class="project-chips">
-          <span>Supabase</span><span>GitHub Pages</span><span>~$0/mo</span>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ===== ABOUT ===== -->
-  <section class="section section-about" id="about">
-    <div class="about-inner">
-      <h2 class="section-title">About <span class="highlight highlight-2">me</span></h2>
-      <p class="about-text">
-        I'm a builder who likes shipping real things for real people — apps my friends and family
-        actually use. My happy place is taking an idea from "wouldn't it be fun if…" to a working
-        product in days, not months, using a lean stack of vanilla JS, Supabase, and a sprinkle of AI.
-      </p>
-      <div class="about-stats">
-        <div class="stat"><span class="stat-num" data-count="10">0</span><span class="stat-label">projects shipped</span></div>
-        <div class="stat"><span class="stat-num" data-count="2">0</span><span class="stat-label">languages, PL & EN</span></div>
-        <div class="stat"><span class="stat-num" data-count="1">0</span><span class="stat-label">app on the App Store</span></div>
+    <!-- ===== Front page ===== -->
+    <section class="front">
+      <div class="front__rule franklin">
+        <span>FRONT PAGE</span>
+        <span>FILED UNDER: OPEN QUESTIONS</span>
       </div>
-    </div>
-  </section>
+      <div class="front__grid">
+        <div class="front__lead">
+          <p class="front__case franklin">CASE NO. 01 — <span class="accent">CO TO, ALEKSANDRA?</span></p>
+          <h2 class="front__headline">A builder who takes odd little ideas seriously — and ships them.</h2>
+          <p class="front__lede caslon">
+            Sources confirm: Aleksandra turns "wouldn't it be fun if…" into working
+            products — a travel app on the App Store, a bilingual tarot site, an AI
+            transcriber — all running on scrappy, nearly-free infrastructure.
+          </p>
+          <p class="front__byline franklin">BY THE CURIOSITY DESK · REPORTING FROM POLAND AND THE INTERNET</p>
+          <div class="front__actions">
+            <a href="#work" class="btn-ink franklin">READ THE EVIDENCE →</a>
+            <a href="#contact" class="btn-line franklin">GET IN TOUCH</a>
+          </div>
+        </div>
+        <aside class="front__facts">
+          <div class="fact">
+            <span class="fact__big">No. 01</span>
+            <span class="franklin">EDITION · FIRST PRINTING</span>
+          </div>
+          <div class="fact">
+            <span class="fact__big">PL / EN</span>
+            <span class="franklin">PUBLISHED BILINGUALLY</span>
+          </div>
+          <div class="fact">
+            <span class="fact__big">Global</span>
+            <span class="franklin">CIRCULATION · REMOTE-FRIENDLY</span>
+          </div>
+          <div class="fact">
+            <span class="fact__big">Late Final</span>
+            <span class="franklin">SHIPS WHEN IT'S READY</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-  <!-- ===== CONTACT ===== -->
-  <section class="section section-contact" id="contact">
-    <h2 class="contact-title">Let's make<br>something <span class="highlight highlight-3">fun</span>.</h2>
-    <a href="mailto:cotoaleksandra@gmail.com" class="btn btn-big">cotoaleksandra@gmail.com ✉️</a>
-    <p class="contact-note">Or find me around the internet:</p>
-    <div class="contact-links">
-      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </section>
+    <!-- ===== The Evidence ===== -->
+    <section class="evidence" id="work">
+      <header class="section-head">
+        <p class="franklin dim">THE EVIDENCE</p>
+        <h2 class="section-head__title">Selected Works</h2>
+        <p class="franklin dim">EXHIBITS A – D · ENTERED 2026 — NOW</p>
+      </header>
 
+      <div class="exhibits">
+
+        <article class="exhibit">
+          <div class="exhibit__stamp franklin" aria-hidden="true">SPRAWDZONE ✓</div>
+          <p class="exhibit__label franklin">EXHIBIT A · <span class="accent">iOS APP · FLAGSHIP</span></p>
+          <h3 class="exhibit__name">Syrena Voyager</h3>
+          <p class="exhibit__desc caslon">
+            Subject observed shipping an invite-only travel-recommendation app —
+            friends share their favorite spots around the world, beautifully mapped.
+            Traces of React Native and Firebase found throughout. Live on the App Store.
+          </p>
+          <p class="exhibit__tags franklin">REACT NATIVE · EXPO · FIREBASE · APP STORE</p>
+          <a class="exhibit__link franklin" href="https://apps.apple.com/app/id6759737888" target="_blank" rel="noopener">OPEN CASE FILE →</a>
+        </article>
+
+        <article class="exhibit">
+          <div class="exhibit__stamp franklin" aria-hidden="true">SPRAWDZONE ✓</div>
+          <p class="exhibit__label franklin">EXHIBIT B · <span class="accent">WEBSITE</span></p>
+          <h3 class="exhibit__name">Tarocik</h3>
+          <p class="exhibit__desc caslon">
+            A bilingual Polish/English tarot broadsheet of its own: a deterministic
+            card of the day, three interactive spreads with shuffle-and-flip
+            animations, and a library of all 78 meanings. Filed as a solo job.
+          </p>
+          <p class="exhibit__tags franklin">VANILLA JS · PL / EN · 78 CARDS</p>
+          <a class="exhibit__link franklin" href="#" >CASE FILE SEALED</a>
+        </article>
+
+        <article class="exhibit">
+          <div class="exhibit__stamp franklin" aria-hidden="true">SPRAWDZONE ✓</div>
+          <p class="exhibit__label franklin">EXHIBIT C · <span class="accent">AI TOOL</span></p>
+          <h3 class="exhibit__name">Transcriber</h3>
+          <p class="exhibit__desc caslon">
+            Examination shows video or audio going in, and clean Polish or English
+            transcripts coming out — timestamps, diacritics and all, with .txt and
+            .srt downloads. Gemini detected behind the scenes.
+          </p>
+          <p class="exhibit__tags franklin">GEMINI AI · 10+ FORMATS · SRT / TXT</p>
+          <a class="exhibit__link franklin" href="#" >CASE FILE SEALED</a>
+        </article>
+
+        <article class="exhibit">
+          <div class="exhibit__stamp franklin" aria-hidden="true">SPRAWDZONE ✓</div>
+          <p class="exhibit__label franklin">EXHIBIT D · <span class="accent">WEB APP · FULL-STACK</span></p>
+          <h3 class="exhibit__name">Olunia</h3>
+          <p class="exhibit__desc caslon">
+            A full-stack platform assembled on nearly-free infrastructure — database,
+            auth, email, payments, the whole works. Supabase prints recovered from
+            every layer; GitHub Pages serving the front.
+          </p>
+          <p class="exhibit__tags franklin">SUPABASE · GITHUB PAGES · ~$0 / MO</p>
+          <a class="exhibit__link franklin" href="https://grotkoaleksandra.github.io/olunia/" target="_blank" rel="noopener">OPEN CASE FILE →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== The Lab Report ===== -->
+    <section class="lab" id="lab">
+      <header class="section-head">
+        <p class="franklin dim">FORENSICS</p>
+        <h2 class="section-head__title">The Lab Report</h2>
+        <p class="franklin dim">SUBSTANCES DETECTED ON THE SUBJECT, AS OF THIS EDITION</p>
+      </header>
+      <div class="lab__grid">
+        <div class="labitem"><span class="labitem__name">JavaScript</span><span class="labitem__code franklin">JS</span><span class="labitem__freq franklin">MOST DAYS</span></div>
+        <div class="labitem"><span class="labitem__name">HTML / CSS</span><span class="labitem__code franklin">MARKUP</span><span class="labitem__freq franklin">MOST DAYS</span></div>
+        <div class="labitem"><span class="labitem__name">Supabase</span><span class="labitem__code franklin">SUPA</span><span class="labitem__freq franklin">IN PROJECTS</span></div>
+        <div class="labitem"><span class="labitem__name">React Native</span><span class="labitem__code franklin">EXPO</span><span class="labitem__freq franklin">IN PROJECTS</span></div>
+        <div class="labitem"><span class="labitem__name">Gemini AI</span><span class="labitem__code franklin">GEM</span><span class="labitem__freq franklin">WHEN IT EARNS ITS KEEP</span></div>
+        <div class="labitem"><span class="labitem__name">GitHub Pages</span><span class="labitem__code franklin">GH</span><span class="labitem__freq franklin">EVERY DEPLOY</span></div>
+      </div>
+      <p class="lab__note caslon">Findings are illustrative — what she reaches for day to day, not a ranking.</p>
+    </section>
+
+    <!-- ===== Letters ===== -->
+    <section class="letters" id="contact">
+      <header class="section-head">
+        <p class="franklin dim">SUBMIT A TIP</p>
+        <h2 class="section-head__title">Letters &amp; Commissions</h2>
+        <p class="franklin dim">THE DESK IS OPEN FOR GOOD IDEAS — 2026</p>
+      </header>
+      <div class="letters__grid">
+        <a href="mailto:cotoaleksandra@gmail.com" class="letters__mail">
+          <span class="letters__mail-title">Put it in writing</span>
+          <span class="letters__mail-addr caslon">cotoaleksandra@gmail.com</span>
+          <span class="franklin dim">USUALLY REPLIES BEFORE THE NEXT EDITION →</span>
+        </a>
+        <div class="letters__aside">
+          <div class="letters__block">
+            <p class="franklin dim">THE DESK</p>
+            <p class="caslon">Poland — working with the whole internet, remote-first.</p>
+          </div>
+          <div class="letters__block">
+            <p class="franklin dim">WIRE SERVICES</p>
+            <p class="caslon">
+              <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">Instagram ↗</a><br>
+              <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">GitHub ↗</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
   <footer class="footer">
-    <p>© 2026 cotoaleksandra · Built with vanilla HTML/CSS/JS and good vibes 🦙</p>
+    <p class="footer__closed franklin">— CASE CLOSED —</p>
+    <p class="franklin dim">© 2026 THE COTOALEKSANDRA TIMES · HAND-SET IN CASLON &amp; FRANKLIN · ALL RIGHTS RESERVED</p>
   </footer>
 
   <script src="script.js"></script>
