@@ -4,156 +4,128 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cotoaleksandra ✳ odd little things, made sincerely</title>
-  <meta name="description" content="Aleksandra makes odd little things on the internet — apps, tools, and ideas that actually ship.">
+  <meta name="description" content="Aleksandra makes odd little things on the internet — apps, websites and ideas that actually ship.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text y='.8em' x='14' font-size='70' fill='%2300ff66'>✳</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
 <body>
 
-  <!-- CRT overlays -->
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-
-  <!-- Curtain-up -->
-  <div class="boot" id="boot" aria-hidden="true">
-    <pre class="boot__log" id="bootLog"></pre>
-    <p class="boot__skip mono">( tap anywhere to skip the theatrics )</p>
-  </div>
-
   <!-- Nav -->
   <nav class="nav">
-    <a href="#top" class="nav__logo mono">✳ coto<span class="green">aleksandra</span><span class="cursor-blink">█</span></a>
-    <div class="nav__links mono">
-      <a href="#work" data-scramble>the work</a>
-      <a href="#person" data-scramble>the person</a>
-      <a href="#letters" data-scramble>write to her</a>
+    <a href="#top" class="nav__logo">coto<em>aleksandra</em> <span class="spin">✳</span></a>
+    <div class="nav__links label">
+      <a href="#work">the work</a>
+      <a href="#person">the person</a>
     </div>
+    <a href="mailto:cotoaleksandra@gmail.com" class="nav__cta label">say cześć</a>
   </nav>
 
   <main id="top">
 
     <!-- Hero -->
     <section class="hero">
-      <p class="hero__pre mono"><span class="green">✳</span> dear internet, allow me to introduce</p>
-      <h1 class="hero__title glitch" data-text="ALEKSANDRA" id="heroTitle">ALEKSANDRA</h1>
-      <p class="hero__serif serif">— who makes <em>odd little things</em> with great sincerity.</p>
-      <p class="hero__sub mono" id="heroSub"></p>
-      <div class="hero__status mono">
-        <span>( warsaw-ish )</span>
-        <span>( bilingual: PL / EN )</span>
-        <span>( perpetually <span class="green">mid-project</span> )</span>
+      <span class="hero__orn spin" aria-hidden="true">✳</span>
+      <p class="hero__kicker label reveal-up">aleksandra, somewhere between warsaw &amp; the internet</p>
+      <h1 class="hero__title">
+        <span class="line" data-split>she makes</span>
+        <span class="line line--em"><em data-split>odd little</em></span>
+        <span class="line" data-split>things —</span>
+      </h1>
+      <p class="hero__rotator">like <span class="rotator"><span class="rotator__word" id="rotatorWord">apps</span></span> that actually ship.</p>
+      <div class="hero__foot">
+        <p class="label dim reveal-up">( scroll, there's more )</p>
+        <p class="label dim reveal-up">( est. 2026, forever mid-project )</p>
       </div>
-      <a href="#work" class="hero__scroll mono" data-scramble>onwards, gently ▼</a>
     </section>
 
     <!-- Marquee -->
-    <div class="marquee mono" aria-hidden="true">
-      <div class="marquee__track" id="marqueeTrack">
-        <span>ODD IDEAS ❋ LOVINGLY OVE&shy;RENGINEERED ❋ SHIPS ANYWAY ❋ SMALL BUT SINCERE ❋ MADE WITH JEDNA KAWA ❋ NO DRAWER-DWELLING DRAFTS ❋&nbsp;</span>
-        <span>ODD IDEAS ❋ LOVINGLY OVE&shy;RENGINEERED ❋ SHIPS ANYWAY ❋ SMALL BUT SINCERE ❋ MADE WITH JEDNA KAWA ❋ NO DRAWER-DWELLING DRAFTS ❋&nbsp;</span>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span><em>odd ideas</em> ✳ lovingly overengineered ✳ <em>ships anyway</em> ✳ small but sincere ✳ <em>made with jedna kawa</em> ✳ no drafts left in drawers ✳&nbsp;</span>
+        <span><em>odd ideas</em> ✳ lovingly overengineered ✳ <em>ships anyway</em> ✳ small but sincere ✳ <em>made with jedna kawa</em> ✳ no drafts left in drawers ✳&nbsp;</span>
       </div>
     </div>
 
     <!-- The Work -->
     <section class="section" id="work">
       <header class="section__head">
-        <p class="mono dim">chapter one, in which she shows her work</p>
-        <h2 class="section__title glitch" data-text="THE WORK">THE <em class="serif">work</em></h2>
-        <p class="serif dim-serif">exhibits pending — the good stuff is being framed as we speak.</p>
+        <p class="label dim reveal-up">chapter one — in which she shows her work</p>
+        <h2 class="section__title reveal-up">the <em>work</em></h2>
+        <p class="section__note reveal-up"><em>exhibits pending — the good stuff is being framed as we speak.</em></p>
       </header>
 
-      <div class="proj">
-        <a class="proj__row reveal" href="#" data-sealed>
-          <span class="proj__idx mono">No. I</span>
-          <span class="proj__name" data-scramble-hover>UNTITLED, FOR NOW</span>
-          <span class="proj__meta mono">( genre: a lovely little app )</span>
-          <span class="proj__arrow serif">soon…</span>
+      <div class="works">
+        <a class="work reveal-up" href="#">
+          <span class="work__no label">no. 1</span>
+          <span class="work__name">Untitled, <em>for now</em></span>
+          <span class="work__meta label">a lovely little app · soon</span>
+          <span class="work__arrow" aria-hidden="true">→</span>
         </a>
-        <p class="proj__desc serif reveal">A placeholder, holding its breath — the real thing is cooking and smells promising.</p>
-
-        <a class="proj__row reveal" href="#" data-sealed>
-          <span class="proj__idx mono">No. II</span>
-          <span class="proj__name" data-scramble-hover>A SECRET, POLITELY KEPT</span>
-          <span class="proj__meta mono">( genre: website with feelings )</span>
-          <span class="proj__arrow serif">soon…</span>
+        <a class="work reveal-up" href="#">
+          <span class="work__no label">no. 2</span>
+          <span class="work__name">A secret, <em>politely kept</em></span>
+          <span class="work__meta label">website with feelings · soon</span>
+          <span class="work__arrow" aria-hidden="true">→</span>
         </a>
-        <p class="proj__desc serif reveal">Description to follow. She's still deciding what to confess first.</p>
-
-        <a class="proj__row reveal" href="#" data-sealed>
-          <span class="proj__idx mono">No. III</span>
-          <span class="proj__name" data-scramble-hover>WORKING TITLE</span>
-          <span class="proj__meta mono">( genre: tool, suspiciously useful )</span>
-          <span class="proj__arrow serif">soon…</span>
+        <a class="work reveal-up" href="#">
+          <span class="work__no label">no. 3</span>
+          <span class="work__name">Working <em>title</em></span>
+          <span class="work__meta label">tool, suspiciously useful · soon</span>
+          <span class="work__arrow" aria-hidden="true">→</span>
         </a>
-        <p class="proj__desc serif reveal">Insert something impressive here — ideally before anyone scrolls this far.</p>
-
-        <a class="proj__row reveal" href="#" data-sealed>
-          <span class="proj__idx mono">No. IV</span>
-          <span class="proj__name" data-scramble-hover>TBA, BUT CUTE</span>
-          <span class="proj__meta mono">( genre: experiment, unsupervised )</span>
-          <span class="proj__arrow serif">soon…</span>
+        <a class="work reveal-up" href="#">
+          <span class="work__no label">no. 4</span>
+          <span class="work__name">TBA, <em>but cute</em></span>
+          <span class="work__meta label">experiment, unsupervised · soon</span>
+          <span class="work__arrow" aria-hidden="true">→</span>
         </a>
-        <p class="proj__desc serif reveal">This space reserved for a future favorite. It doesn't know it yet.</p>
       </div>
-
-      <p class="dinkus" aria-hidden="true">❋ ❋ ❋</p>
     </section>
 
     <!-- The Person -->
-    <section class="section" id="person">
+    <section class="section section--tint" id="person">
       <header class="section__head">
-        <p class="mono dim">chapter two, in which she is described</p>
-        <h2 class="section__title glitch" data-text="THE PERSON">THE <em class="serif">person</em></h2>
+        <p class="label dim reveal-up">chapter two — in which she is described</p>
+        <h2 class="section__title reveal-up">the <em>person</em></h2>
       </header>
 
-      <div class="about__grid">
-        <div class="note reveal">
-          <p class="note__label mono">✳ field notes, handwritten-ish</p>
-          <div class="note__body serif">
-            <p>She builds things her friends and family <span class="green">actually use</span> — which, as any maker knows, is the harshest possible QA.</p>
-            <p>Ideas go from <em>"wouldn't it be fun if…"</em> to shipped in days, not months. The stack is kept deliberately boring so the ideas don't have to be.</p>
-            <p>Everything ships. Nothing sulks in a drawer.<span class="cursor-blink">█</span></p>
-          </div>
-        </div>
-        <div class="skills mono reveal">
-          <p class="skills__title serif">an honest inventory —</p>
-          <p class="skills__row"><span class="skills__label">MAKING THINGS</span><span class="skills__bar" data-level="9"></span></p>
-          <p class="skills__row"><span class="skills__label">FINISHING THINGS</span><span class="skills__bar" data-level="8"></span></p>
-          <p class="skills__row"><span class="skills__label">NAMING THINGS</span><span class="skills__bar" data-level="4"></span></p>
-          <p class="skills__row"><span class="skills__label">RESISTING NEW IDEAS</span><span class="skills__bar" data-level="2"></span></p>
-          <p class="skills__row"><span class="skills__label">KAWA CONSUMPTION</span><span class="skills__bar" data-level="10"></span></p>
-        </div>
-      </div>
+      <p class="prose" data-words>
+        She builds things her friends and family actually use — which, as any maker
+        knows, is the harshest possible QA. Ideas go from “wouldn’t it be fun if…”
+        to shipped in days, not months. Everything ships. Nothing sulks in a drawer.
+      </p>
 
-      <p class="dinkus" aria-hidden="true">❋ ❋ ❋</p>
+      <div class="inventory">
+        <p class="inventory__title reveal-up"><em>an honest inventory —</em></p>
+        <div class="inventory__row reveal-up"><span class="label">making things</span><span class="meter" data-level="90"><i></i></span></div>
+        <div class="inventory__row reveal-up"><span class="label">finishing things</span><span class="meter" data-level="80"><i></i></span></div>
+        <div class="inventory__row reveal-up"><span class="label">naming things</span><span class="meter" data-level="40"><i></i></span></div>
+        <div class="inventory__row reveal-up"><span class="label">resisting new ideas</span><span class="meter" data-level="15"><i></i></span></div>
+        <div class="inventory__row reveal-up"><span class="label">kawa consumption</span><span class="meter" data-level="100"><i></i></span></div>
+      </div>
     </section>
 
     <!-- Letters -->
-    <section class="section" id="letters">
-      <header class="section__head">
-        <p class="mono dim">chapter three, in which you say hello</p>
-        <h2 class="section__title glitch" data-text="THE LETTERS">THE <em class="serif">letters</em></h2>
-      </header>
-
-      <a href="mailto:cotoaleksandra@gmail.com" class="contact__mail reveal">
-        <span class="contact__mail-big glitch" data-text="SAY CZEŚĆ" data-scramble-hover>SAY CZEŚĆ</span>
-        <span class="serif dim-serif">cotoaleksandra@gmail.com — replies arrive somewhere between promptly and <em>eventually.</em></span>
+    <section class="section section--contact" id="letters">
+      <p class="label dim reveal-up">chapter three — in which you say hello</p>
+      <a href="mailto:cotoaleksandra@gmail.com" class="contact" id="contactLink">
+        <span class="contact__big" id="contactBig">say <em>cześć</em></span>
       </a>
-
-      <div class="contact__links mono reveal">
-        <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener" data-scramble>instagram ↗</a>
-        <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener" data-scramble>github ↗</a>
+      <p class="contact__mail reveal-up">cotoaleksandra@gmail.com — replies arrive somewhere between <em>promptly</em> and <em>eventually.</em></p>
+      <div class="contact__links label reveal-up">
+        <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">instagram ↗</a>
+        <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">github ↗</a>
       </div>
     </section>
 
   </main>
 
-  <footer class="footer mono">
+  <footer class="footer label">
     <span class="dim">© 2026 cotoaleksandra ✳ printed on recycled pixels</span>
-    <span class="dim serif-inline"><em>fin.</em></span>
+    <span class="dim"><em class="fin">fin.</em></span>
   </footer>
 
   <script src="script.js"></script>
