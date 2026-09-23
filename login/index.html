@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>the back room ✳ cotoaleksandra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../admin/studio.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
+</head>
+<body class="studio-gate">
+
+  <main class="gate">
+    <a href="../" class="nav__logo">coto<em>aleksandra</em> <span class="spin">✳</span></a>
+    <h1 class="gate__title">the <em>back room</em></h1>
+    <p class="gate__note">where the letters land.</p>
+    <button class="letter__send label" id="google">continue with google</button>
+    <p class="letter__note" id="note" role="status" aria-live="polite"></p>
+    <a href="../" class="label dim gate__back">← back to the front</a>
+  </main>
+
+  <script type="module">
+    import { getSession, signInWithGoogle } from '../shared/auth.js';
+    import { CONFIGURED } from '../shared/supabase.js';
+    import { path } from '../shared/paths.js';
+
+    const note = document.getElementById('note');
+    const btn = document.getElementById('google');
+
+    if (!CONFIGURED) {
+      btn.disabled = true;
+      note.className = 'letter__note bad';
+      note.textContent = 'Supabase isn’t connected yet.';
+    } else if (await getSession()) {
+      location.replace(path('admin/'));
+    }
+
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      note.className = 'letter__note';
+      note.textContent = 'opening google…';
+      try {
+        await signInWithGoogle();
+      } catch (err) {
+        btn.disabled = false;
+        note.className = 'letter__note bad';
+        note.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>
