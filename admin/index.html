@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>the back room ✳ cotoaleksandra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="studio.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
+</head>
+<body class="studio">
+
+  <header class="studio__bar">
+    <a href="../" class="nav__logo">coto<em>aleksandra</em> <span class="spin">✳</span></a>
+    <span class="label studio__who" id="who"></span>
+    <button class="studio__out label" id="signout">sign out</button>
+  </header>
+
+  <main class="studio__body">
+    <div class="tabs" role="tablist">
+      <button class="label" role="tab" id="tab-letters" aria-selected="true" aria-controls="panel-letters">letters</button>
+      <button class="label" role="tab" id="tab-work" aria-selected="false" aria-controls="panel-work">the work</button>
+    </div>
+
+    <section id="panel-letters" role="tabpanel" aria-labelledby="tab-letters">
+      <div id="letters"><p class="studio__empty">opening the letterbox…</p></div>
+    </section>
+
+    <section id="panel-work" role="tabpanel" aria-labelledby="tab-work" hidden>
+      <form class="work-form" id="workForm">
+        <p class="letter__intro" style="text-align:left"><em>add or update a piece —</em></p>
+        <div class="work-form__row">
+          <label class="letter__field">
+            <span class="label dim">name</span>
+            <input type="text" name="name" placeholder="Untitled," required>
+          </label>
+          <label class="letter__field">
+            <span class="label dim">the italic bit</span>
+            <input type="text" name="name_em" placeholder="for now">
+          </label>
+        </div>
+        <label class="letter__field">
+          <span class="label dim">meta line</span>
+          <input type="text" name="meta" placeholder="a lovely little app · 2026">
+        </label>
+        <div class="work-form__row">
+          <label class="letter__field">
+            <span class="label dim">link (optional)</span>
+            <input type="url" name="url" placeholder="https://">
+          </label>
+          <label class="letter__field">
+            <span class="label dim">order</span>
+            <input type="number" name="sort_order" value="10">
+          </label>
+        </div>
+        <label class="work-form__check label">
+          <input type="checkbox" name="published" checked> published
+        </label>
+        <input type="hidden" name="id">
+        <button class="letter__send label" type="submit" style="align-self:flex-start">save it ✳</button>
+        <p class="letter__note" id="workNote" role="status" aria-live="polite" style="text-align:left"></p>
+      </form>
+      <div id="workList"></div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

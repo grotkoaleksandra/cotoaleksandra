@@ -1,0 +1,95 @@
+/* ---------- The back room — private pages, same paper ---------- */
+
+.studio-gate, .studio { background: var(--paper); }
+
+.gate {
+  min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px; padding: 40px var(--pad); text-align: center;
+}
+.gate__title {
+  font-family: var(--display); font-weight: 560;
+  font-size: clamp(44px, 9vw, 92px); line-height: 1; letter-spacing: -0.03em;
+  margin-top: 18px;
+}
+.gate__title em { color: var(--accent); font-weight: 480; }
+.gate__note { font-family: var(--display); font-size: clamp(17px, 1.9vw, 22px); color: var(--dim); }
+.gate__back { margin-top: 20px; }
+
+/* Top bar */
+.studio__bar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 16px var(--pad);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hair);
+}
+.studio__who { margin-left: auto; color: var(--dim); }
+.studio__out {
+  cursor: pointer; background: transparent; color: var(--ink);
+  border: 1px solid var(--hair); border-radius: 999px; padding: 9px 18px;
+  font-family: var(--sans);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.studio__out:hover { border-color: var(--accent); color: var(--accent); }
+
+.studio__body { padding: clamp(28px, 6vh, 56px) var(--pad) 100px; }
+
+.tabs { display: flex; gap: 8px; margin-bottom: clamp(24px, 4vh, 40px); }
+.tabs button {
+  cursor: pointer; background: transparent; color: var(--ink);
+  border: 1px solid var(--hair); border-radius: 999px; padding: 9px 20px;
+  font-family: var(--sans);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.note-card {
+  border-top: 1px solid var(--hair);
+  padding: clamp(20px, 3vh, 30px) 4px;
+}
+.note-card:last-child { border-bottom: 1px solid var(--hair); }
+.note-card__head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.note-card__subject {
+  font-family: var(--display); font-weight: 540;
+  font-size: clamp(21px, 2.6vw, 30px); letter-spacing: -0.01em;
+}
+.note-card__when { margin-left: auto; color: var(--dim); }
+.note-card__from { margin-top: 6px; color: var(--dim); }
+.note-card__from a { border-bottom: 1px solid var(--accent); }
+.note-card__body {
+  margin-top: 14px; white-space: pre-wrap;
+  font-family: var(--display); font-size: clamp(16px, 1.7vw, 19px);
+}
+.note-card__actions { margin-top: 16px; }
+
+.fresh {
+  background: var(--accent); color: var(--paper);
+  border-radius: 999px; padding: 3px 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+.mini {
+  cursor: pointer; background: transparent; color: var(--dim);
+  border: 1px solid var(--hair); border-radius: 999px; padding: 7px 16px;
+  font-family: var(--sans);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.mini:hover { border-color: var(--accent); color: var(--accent); }
+
+.studio__empty {
+  padding: clamp(50px, 10vh, 90px) 0; text-align: center; color: var(--dim);
+  font-family: var(--display); font-size: clamp(18px, 2vw, 24px);
+}
+
+.work-form {
+  max-width: 620px;
+  display: flex; flex-direction: column; gap: 20px;
+  padding-bottom: clamp(30px, 5vh, 50px);
+  border-bottom: 1px solid var(--hair);
+  margin-bottom: clamp(28px, 4vh, 44px);
+}
+.work-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 620px) { .work-form__row { grid-template-columns: 1fr; } }
+.work-form__check { display: flex; align-items: center; gap: 10px; color: var(--dim); }
