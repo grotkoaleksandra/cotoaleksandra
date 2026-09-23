@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
 <body>
@@ -115,6 +116,33 @@
         <span class="contact__big" id="contactBig">say <em>cześć</em></span>
       </a>
       <p class="contact__mail reveal-up">cotoaleksandra@gmail.com — replies arrive somewhere between <em>promptly</em> and <em>eventually.</em></p>
+
+      <!-- Appears only once Supabase is connected; until then the big link above
+           is an ordinary mailto and nothing here is shown. -->
+      <form class="letter" id="contactForm" hidden>
+        <p class="letter__intro"><em>or leave a note —</em></p>
+        <label class="letter__field">
+          <span class="label dim">your name</span>
+          <input type="text" name="name" autocomplete="name" required>
+        </label>
+        <label class="letter__field">
+          <span class="label dim">where to reply</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label class="letter__field">
+          <span class="label dim">what's it about</span>
+          <input type="text" name="subject" required>
+        </label>
+        <label class="letter__field">
+          <span class="label dim">the note itself</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <label class="letter__hp" aria-hidden="true">
+          leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off">
+        </label>
+        <button class="letter__send label" type="submit">send it ✳</button>
+        <p class="letter__note" id="contactNote" role="status" aria-live="polite"></p>
+      </form>
       <div class="contact__links label reveal-up">
         <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">instagram ↗</a>
         <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">github ↗</a>
@@ -129,5 +157,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script type="module" src="shared/page.js"></script>
 </body>
 </html>

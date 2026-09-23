@@ -363,3 +363,71 @@ em {
   .reveal-ready .reveal-up { opacity: 1; transform: none; filter: none; transition: none; }
   .meter i { transition: none; }
 }
+
+/* ---------- The letter (contact form) ---------- */
+/* `display: flex` would otherwise beat the browser's [hidden] rule, and the
+   form would show before Supabase is connected. */
+.letter[hidden] { display: none; }
+
+.letter {
+  width: min(560px, 100%);
+  margin-top: clamp(8px, 2vh, 18px);
+  text-align: left;
+  display: flex; flex-direction: column; gap: 22px;
+}
+
+.letter__intro {
+  font-family: var(--display);
+  font-size: clamp(19px, 2vw, 26px);
+  text-align: center;
+  color: var(--dim);
+}
+.letter__intro em { color: var(--accent); }
+
+.letter__field { display: flex; flex-direction: column; gap: 7px; }
+
+.letter__field input,
+.letter__field textarea {
+  width: 100%;
+  font-family: var(--display);
+  font-size: clamp(17px, 1.8vw, 21px);
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--hair);
+  padding: 8px 2px;
+  resize: vertical;
+  transition: border-color 0.3s var(--ease);
+}
+.letter__field textarea { line-height: 1.5; }
+.letter__field input:focus,
+.letter__field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.letter__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.letter__send {
+  align-self: center;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 13px 30px;
+  font-family: var(--sans);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.letter__send:hover { background: var(--ink); color: var(--paper); transform: rotate(-2deg); }
+.letter__send:disabled { opacity: 0.5; cursor: progress; transform: none; }
+
+.letter__note {
+  min-height: 1.4em;
+  text-align: center;
+  font-family: var(--display);
+  font-size: clamp(15px, 1.5vw, 18px);
+  color: var(--dim);
+}
+.letter__note.ok { color: var(--accent); }
+.letter__note.bad { color: #a8301a; }
