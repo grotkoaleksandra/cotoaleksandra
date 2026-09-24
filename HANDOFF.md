@@ -1,8 +1,12 @@
 # Handoff — picking this up in Claude Code
 
 Read `AGENTS.md` for conventions, `docs/SCHEMA.md` for the database and
-`docs/DEPLOY.md` for shipping. This file is the state of play as of
-2026-09-23 and the three things that are still open.
+`docs/DEPLOY.md` for shipping. State of play as of 2026-09-24.
+
+**Everything is pushed and live.** The contact form on
+`https://grotkoaleksandra.github.io/cotoaleksandra/` was submitted from the
+real page and answered "Landed. She'll write back." — the row reached
+Supabase and was then deleted. One thing is left: the anon key.
 
 ## What this is
 
@@ -56,16 +60,9 @@ the original static site instead of showing something broken.
 
 Anything new that depends on Supabase checks the right flag first.
 
-## Three things still open
+## One thing still open
 
-### 1. Push — two commits are sitting unpushed
-```bash
-cd ~/Documents/cotoaleksandra && git push
-```
-`a856cdc` and `11a5025`. Nothing has been deployed yet; the live site is
-still the pre-Supabase version. Claude Code can run this directly.
-
-### 2. Paste the anon key
+### Paste the anon key
 Supabase → Project Settings → API Keys → **Legacy anon, service_role API
 keys** → copy `anon` → replace `YOUR_SUPABASE_ANON_KEY` in
 `shared/supabase.js` (line 7). Public by design; RLS is the protection.
@@ -73,8 +70,9 @@ Use the **legacy JWT** key, not the new `sb_publishable_…` one — the pinned
 supabase-js (2.39.3) expects the JWT form.
 
 That flips `CONFIGURED` and lights up the work list, `/login/` and `/admin/`.
+Nothing else is blocking.
 
-### 3. Google sign-in, only needed for `/admin/`
+### Optional, only if you want `/admin/`
 Google Cloud OAuth client with redirect URI
 `https://vnkwdfbwplgkcjgvvixp.supabase.co/auth/v1/callback`, then enable the
 provider in Supabase → Authentication → Providers, and add the site's URLs
