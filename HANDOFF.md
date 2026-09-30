@@ -24,7 +24,7 @@ earlier cream-and-terracotta scrolling page, which she found ugly. Lives in
 
 - Repo: `github.com/grotkoaleksandra/cotoaleksandra` (public)
 - Live: `https://grotkoaleksandra.github.io/cotoaleksandra/`
-- Domain: `cotoaleksandra.com` — **does not resolve yet**, not pointed
+- Domain: `cotoaleksandra.com` — **live** (2026-09-30). DNS at Cloudflare: 4 A records + `www` CNAME, all "DNS only" (grey cloud — must stay grey or GitHub's certificate breaks). Custom domain set in repo Settings → Pages, HTTPS enforced. Cloudflare also holds Resend's `send` MX/SPF and `resend._domainkey` DKIM records.
 - Deploys: `.github/workflows/` → Pages, on every push to `main`
 
 ## Supabase — live and verified
@@ -83,8 +83,6 @@ provider in Supabase → Authentication → Providers, and add the site's URLs
 under Authentication → URL Configuration.
 
 ## Then, in rough order
-- Point `cotoaleksandra.com` at Pages (A records in `docs/DEPLOY.md`), tick
-  Enforce HTTPS
 - Replace the four placeholder work rows with real projects — either through
   `/admin/` or by editing `index.html`
 - Fill in the social links if any are missing
