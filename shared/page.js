@@ -27,7 +27,7 @@ async function swapInTheWork() {
 
   // The section note promises the work is "being framed" — retire it once
   // there is actual work on the page.
-  document.querySelector('[data-panel="portfolio"] .section__note')?.remove();
+  document.querySelector('[data-panel="showcase"] .section__note')?.remove();
 }
 
 // ---- the letter form ----

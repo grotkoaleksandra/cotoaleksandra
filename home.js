@@ -1,8 +1,8 @@
 // ===== cotoaleksandra — category switching =====
 // One category on screen at a time. The URL hash is the source of truth, so
-// links like cotoaleksandra.com/#portfolio open straight onto that category.
+// links like cotoaleksandra.com/#showcase open straight onto that category.
 
-const CATEGORIES = ['hello', 'portfolio', 'about', 'contact'];
+const CATEGORIES = ['hello', 'showcase', 'about', 'contact'];
 
 function show(name) {
   if (!CATEGORIES.includes(name)) name = 'hello';

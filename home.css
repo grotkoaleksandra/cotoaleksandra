@@ -13,7 +13,7 @@
 
   /* one background per category */
   --bg-hello: #f7cfdc;   /* pink */
-  --bg-portfolio: #f6e27f;    /* yellow */
+  --bg-showcase: #f6e27f;     /* yellow */
   --bg-about: #bcd6f4;  /* blue */
   --bg-contact: #cfe7c4; /* green */
 
@@ -35,7 +35,7 @@ body {
   min-height: 100vh;
   transition: background-color 0.7s var(--ease);
 }
-body[data-category="portfolio"] { --bg: var(--bg-portfolio); }
+body[data-category="showcase"] { --bg: var(--bg-showcase); }
 body[data-category="about"] { --bg: var(--bg-about); }
 body[data-category="contact"] { --bg: var(--bg-contact); }
 
