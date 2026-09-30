@@ -14,9 +14,13 @@ Aleksandra's portfolio and contact site. Static HTML/CSS/JS on GitHub Pages,
 Supabase behind it for the contact form, the work list and a private back
 room. No server anywhere.
 
-Her existing design — Fraunces, cream paper, terracotta accent, ✳, sections
-*the work / the person / say cześć* — was kept as-is. The Supabase layer was
-built into it, not over it. Don't redesign it.
+**Design (chosen by Aleksandra, 2026-09-30):** a quiet list of categories on
+the left in thin, faded text — *hello / showcase / about me / contact* — and
+the content in white boxes in the middle. The background behind the boxes
+changes colour per category (pink / yellow / blue / green). One category is
+shown at a time, switched by the URL hash (`#showcase` etc.). This replaced the
+earlier cream-and-terracotta scrolling page, which she found ugly. Lives in
+`index.html`, `home.css`, `home.js`.
 
 - Repo: `github.com/grotkoaleksandra/cotoaleksandra` (public)
 - Live: `https://grotkoaleksandra.github.io/cotoaleksandra/`
