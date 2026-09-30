@@ -19,17 +19,15 @@ async function swapInTheWork() {
   if (!projects) return; // nothing published yet — leave the placeholders alone
 
   list.innerHTML = projects.map((p, i) => `
-    <a class="work reveal-up in" href="${esc(p.url || '#')}"${p.url ? ' target="_blank" rel="noopener"' : ''}>
-      <span class="work__no label">no. ${i + 1}</span>
-      <span class="work__name">${esc(p.name)}${p.name_em ? ` <em>${esc(p.name_em)}</em>` : ''}</span>
-      <span class="work__meta label">${esc(p.meta || '')}</span>
-      <span class="work__arrow" aria-hidden="true">→</span>
+    <a class="box work" href="${esc(p.url || '#')}"${p.url ? ' target="_blank" rel="noopener"' : ''}>
+      <p class="kicker">no. ${i + 1}${p.meta ? ` · ${esc(p.meta)}` : ''}</p>
+      <h2 class="work__name">${esc(p.name)}${p.name_em ? ` <em>${esc(p.name_em)}</em>` : ''}</h2>
     </a>
   `).join('');
 
   // The section note promises the work is "being framed" — retire it once
   // there is actual work on the page.
-  document.querySelector('#work .section__note')?.remove();
+  document.querySelector('[data-panel="portfolio"] .section__note')?.remove();
 }
 
 // ---- the letter form ----

@@ -7,156 +7,118 @@
   <meta name="description" content="Aleksandra makes odd little things on the internet — apps, websites and ideas that actually ship.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
-<body>
+<body data-category="hello">
 
-  <!-- Nav -->
-  <nav class="nav">
-    <a href="#top" class="nav__logo">coto<em>aleksandra</em> <span class="spin">✳</span></a>
-    <div class="nav__links label">
-      <a href="#work">the work</a>
-      <a href="#person">the person</a>
+  <!-- The list on the left: thin, quiet, always there -->
+  <aside class="side">
+    <a href="#hello" class="side__logo">coto<em>aleksandra</em> ✳</a>
+    <nav class="side__nav" aria-label="Categories">
+      <a href="#hello" data-go="hello">hello</a>
+      <a href="#portfolio" data-go="portfolio">portfolio</a>
+      <a href="#about" data-go="about">about me</a>
+      <a href="#contact" data-go="contact">contact</a>
+    </nav>
+    <div class="side__foot">
+      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">instagram</a>
+      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">github</a>
     </div>
-    <a href="mailto:cotoaleksandra@gmail.com" class="nav__cta label">say cześć</a>
-  </nav>
+  </aside>
 
-  <main id="top">
+  <!-- The middle: one category at a time, everything in boxes -->
+  <main class="stage">
 
-    <!-- Hero -->
-    <section class="hero">
-      <span class="hero__orn spin" aria-hidden="true">✳</span>
-      <p class="hero__kicker label reveal-up">aleksandra, somewhere between warsaw &amp; the internet</p>
-      <h1 class="hero__title">
-        <span class="line" data-split>she makes</span>
-        <span class="line line--em"><em data-split>odd little</em></span>
-        <span class="line" data-split>things —</span>
-      </h1>
-      <p class="hero__rotator">like <span class="rotator"><span class="rotator__word" id="rotatorWord">apps</span></span> that actually ship.</p>
-      <div class="hero__foot">
-        <p class="label dim reveal-up">( scroll, there's more )</p>
-        <p class="label dim reveal-up">( est. 2026, forever mid-project )</p>
-      </div>
+    <section class="panel" data-panel="hello">
+      <article class="box">
+        <p class="kicker">aleksandra, somewhere between warsaw &amp; the internet</p>
+        <h1 class="big">she makes <em>odd little</em> things —</h1>
+        <p class="lede">like apps, websites and tiny tools that actually ship.</p>
+      </article>
     </section>
 
-    <!-- Marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span><em>odd ideas</em> ✳ lovingly overengineered ✳ <em>ships anyway</em> ✳ small but sincere ✳ <em>made with jedna kawa</em> ✳ no drafts left in drawers ✳&nbsp;</span>
-        <span><em>odd ideas</em> ✳ lovingly overengineered ✳ <em>ships anyway</em> ✳ small but sincere ✳ <em>made with jedna kawa</em> ✳ no drafts left in drawers ✳&nbsp;</span>
-      </div>
-    </div>
-
-    <!-- The Work -->
-    <section class="section" id="work">
-      <header class="section__head">
-        <p class="label dim reveal-up">chapter one — in which she shows her work</p>
-        <h2 class="section__title reveal-up">the <em>work</em></h2>
-        <p class="section__note reveal-up"><em>exhibits pending — the good stuff is being framed as we speak.</em></p>
-      </header>
-
+    <section class="panel" data-panel="portfolio" hidden>
+      <article class="box">
+        <p class="kicker">portfolio</p>
+        <p class="section__note">exhibits pending — the good stuff is being framed as we speak.</p>
+      </article>
       <div class="works">
-        <a class="work reveal-up" href="#">
-          <span class="work__no label">no. 1</span>
-          <span class="work__name">Untitled, <em>for now</em></span>
-          <span class="work__meta label">a lovely little app · soon</span>
-          <span class="work__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="work reveal-up" href="#">
-          <span class="work__no label">no. 2</span>
-          <span class="work__name">A secret, <em>politely kept</em></span>
-          <span class="work__meta label">website with feelings · soon</span>
-          <span class="work__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="work reveal-up" href="#">
-          <span class="work__no label">no. 3</span>
-          <span class="work__name">Working <em>title</em></span>
-          <span class="work__meta label">tool, suspiciously useful · soon</span>
-          <span class="work__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="work reveal-up" href="#">
-          <span class="work__no label">no. 4</span>
-          <span class="work__name">TBA, <em>but cute</em></span>
-          <span class="work__meta label">experiment, unsupervised · soon</span>
-          <span class="work__arrow" aria-hidden="true">→</span>
-        </a>
+        <article class="box work">
+          <div class="work__media" aria-hidden="true"><span>image or video</span></div>
+          <p class="kicker">no. 1 · a lovely little app</p>
+          <h2 class="work__name">Untitled, <em>for now</em></h2>
+        </article>
+        <article class="box work">
+          <div class="work__media" aria-hidden="true"><span>image or video</span></div>
+          <p class="kicker">no. 2 · website with feelings</p>
+          <h2 class="work__name">A secret, <em>politely kept</em></h2>
+        </article>
+        <article class="box work">
+          <div class="work__media" aria-hidden="true"><span>image or video</span></div>
+          <p class="kicker">no. 3 · tool, suspiciously useful</p>
+          <h2 class="work__name">Working <em>title</em></h2>
+        </article>
       </div>
     </section>
 
-    <!-- The Person -->
-    <section class="section section--tint" id="person">
-      <header class="section__head">
-        <p class="label dim reveal-up">chapter two — in which she is described</p>
-        <h2 class="section__title reveal-up">the <em>person</em></h2>
-      </header>
-
-      <p class="prose" data-words>
-        She builds things her friends and family actually use — which, as any maker
-        knows, is the harshest possible QA. Ideas go from “wouldn’t it be fun if…”
-        to shipped in days, not months. Everything ships. Nothing sulks in a drawer.
-      </p>
-
-      <div class="inventory">
-        <p class="inventory__title reveal-up"><em>an honest inventory —</em></p>
-        <div class="inventory__row reveal-up"><span class="label">making things</span><span class="meter" data-level="90"><i></i></span></div>
-        <div class="inventory__row reveal-up"><span class="label">finishing things</span><span class="meter" data-level="80"><i></i></span></div>
-        <div class="inventory__row reveal-up"><span class="label">naming things</span><span class="meter" data-level="40"><i></i></span></div>
-        <div class="inventory__row reveal-up"><span class="label">resisting new ideas</span><span class="meter" data-level="15"><i></i></span></div>
-        <div class="inventory__row reveal-up"><span class="label">kawa consumption</span><span class="meter" data-level="100"><i></i></span></div>
-      </div>
+    <section class="panel" data-panel="about" hidden>
+      <article class="box">
+        <p class="kicker">about me</p>
+        <p class="prose">
+          She builds things her friends and family actually use — which, as any maker
+          knows, is the harshest possible QA. Ideas go from “wouldn’t it be fun if…”
+          to shipped in days, not months. Everything ships. Nothing sulks in a drawer.
+        </p>
+      </article>
+      <article class="box">
+        <p class="kicker">an honest inventory</p>
+        <div class="inv"><span>making things</span><span class="meter"><i style="width:90%"></i></span></div>
+        <div class="inv"><span>finishing things</span><span class="meter"><i style="width:80%"></i></span></div>
+        <div class="inv"><span>naming things</span><span class="meter"><i style="width:40%"></i></span></div>
+        <div class="inv"><span>resisting new ideas</span><span class="meter"><i style="width:15%"></i></span></div>
+        <div class="inv"><span>kawa consumption</span><span class="meter"><i style="width:100%"></i></span></div>
+      </article>
     </section>
 
-    <!-- Letters -->
-    <section class="section section--contact" id="letters">
-      <p class="label dim reveal-up">chapter three — in which you say hello</p>
-      <a href="mailto:cotoaleksandra@gmail.com" class="contact" id="contactLink">
-        <span class="contact__big" id="contactBig">say <em>cześć</em></span>
-      </a>
-      <p class="contact__mail reveal-up">cotoaleksandra@gmail.com — replies arrive somewhere between <em>promptly</em> and <em>eventually.</em></p>
+    <section class="panel" data-panel="contact" hidden>
+      <article class="box">
+        <p class="kicker">contact</p>
+        <p class="lede"><a href="mailto:cotoaleksandra@gmail.com">cotoaleksandra@gmail.com</a> — replies arrive somewhere between <em>promptly</em> and <em>eventually.</em></p>
+      </article>
 
-      <!-- Appears only once Supabase is connected; until then the big link above
-           is an ordinary mailto and nothing here is shown. -->
-      <form class="letter" id="contactForm" hidden>
-        <p class="letter__intro"><em>or leave a note —</em></p>
+      <!-- Appears only once Supabase is connected (shared/page.js). -->
+      <form class="box letter" id="contactForm" hidden>
+        <p class="kicker">or leave a note</p>
         <label class="letter__field">
-          <span class="label dim">your name</span>
+          <span>your name</span>
           <input type="text" name="name" autocomplete="name" required>
         </label>
         <label class="letter__field">
-          <span class="label dim">where to reply</span>
+          <span>where to reply</span>
           <input type="email" name="email" autocomplete="email" required>
         </label>
         <label class="letter__field">
-          <span class="label dim">what's it about</span>
+          <span>what's it about</span>
           <input type="text" name="subject" required>
         </label>
         <label class="letter__field">
-          <span class="label dim">the note itself</span>
+          <span>the note itself</span>
           <textarea name="message" rows="5" required></textarea>
         </label>
         <label class="letter__hp" aria-hidden="true">
           leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off">
         </label>
-        <button class="letter__send label" type="submit">send it ✳</button>
+        <button class="letter__send" type="submit">send it ✳</button>
         <p class="letter__note" id="contactNote" role="status" aria-live="polite"></p>
       </form>
-      <div class="contact__links label reveal-up">
-        <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">instagram ↗</a>
-        <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">github ↗</a>
-      </div>
     </section>
 
   </main>
 
-  <footer class="footer label">
-    <span class="dim">© 2026 cotoaleksandra ✳ printed on recycled pixels</span>
-    <span class="dim"><em class="fin">fin.</em></span>
-  </footer>
-
-  <script src="script.js"></script>
+  <script src="home.js"></script>
   <script type="module" src="shared/page.js"></script>
 </body>
 </html>
