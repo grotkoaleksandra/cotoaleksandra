@@ -161,16 +161,6 @@ em {
 a.work { display: block; text-decoration: none; transition: transform 0.3s var(--ease); }
 a.work:hover { transform: translateY(-3px); }
 
-/* ---------- Person ---------- */
-.inv {
-  display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 16px;
-  padding: 10px 0;
-  border-top: 1px solid var(--hair);
-  font-size: 15px;
-}
-.meter { height: 6px; background: var(--hair); border-radius: 3px; overflow: hidden; }
-.meter i { display: block; height: 100%; background: var(--ink); border-radius: 3px; }
-
 /* ---------- The letter (contact form) ---------- */
 .letter { display: flex; flex-direction: column; gap: 18px; }
 .letter[hidden] { display: none; }
@@ -216,7 +206,6 @@ a.work:hover { transform: translateY(-3px); }
   .side__foot { display: none; }
   .stage { margin-left: 0; min-height: auto; padding: 24px 16px 56px; }
   .panel { margin-block: 0; }
-  .inv { grid-template-columns: 1fr; gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
