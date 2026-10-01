@@ -60,9 +60,10 @@ em {
 .side__logo {
   font-family: var(--display);
   font-size: 17px;
-  text-decoration: none;
+  font-weight: 400;
   margin-bottom: 56px;
 }
+.side__logo a { text-decoration: none; }
 
 .side__nav { display: flex; flex-direction: column; gap: 14px; }
 
@@ -216,8 +217,3 @@ a.work:hover { transform: translateY(-3px); }
   .panel.enter .box { animation: none; }
 }
 
-/* Read by screen readers and search engines, not shown. */
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
-}

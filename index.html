@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@200..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="home.css?v=2">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
@@ -16,7 +16,7 @@
 
   <!-- The list on the left: thin, quiet, always there -->
   <aside class="side">
-    <a href="#hello" class="side__logo">coto<em>aleksandra</em> ✳</a>
+    <h1 class="side__logo"><a href="#hello">coto<em>aleksandra</em> ✳</a></h1>
     <nav class="side__nav" aria-label="Categories">
       <a href="#hello" data-go="hello">hello</a>
       <a href="#showcase" data-go="showcase">showcase</a>
@@ -31,8 +31,6 @@
 
   <!-- The middle: one category at a time, everything in boxes -->
   <main class="stage">
-
-    <h1 class="sr-only">cotoaleksandra</h1>
 
     <section class="panel" data-panel="hello">
       <article class="box box--blank" aria-hidden="true"></article>
@@ -101,7 +99,7 @@
 
   </main>
 
-  <script src="home.js"></script>
+  <script src="home.js?v=2"></script>
   <script type="module" src="shared/page.js"></script>
 </body>
 </html>
