@@ -223,3 +223,9 @@ a.work:hover { transform: translateY(-3px); }
   body, .side, .work__media { transition: none; }
   .panel.enter .box { animation: none; }
 }
+
+/* Read by screen readers and search engines, not shown. */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
