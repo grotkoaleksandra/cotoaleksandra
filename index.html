@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@200..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="home.css?v=2">
+  <link rel="stylesheet" href="home.css?v=8">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
@@ -61,7 +61,22 @@
     </section>
 
     <section class="panel" data-panel="about" hidden>
-      <article class="box box--blank" aria-hidden="true"></article>
+      <article class="box about">
+        <div class="about__text">
+          <p class="kicker">about me</p>
+          <h2 class="about__sub">favourite movies</h2>
+          <ul class="films">
+            <li class="film">
+              <span class="film__title">Donnie Darko</span>
+              <span class="film__meta">2001 · Richard Kelly</span>
+            </li>
+          </ul>
+        </div>
+        <figure class="about__karol">
+          <img src="karol.svg?v=1" alt="Karol, her dog, wagging his tail" width="460" height="515">
+          <figcaption>karol</figcaption>
+        </figure>
+      </article>
     </section>
 
     <section class="panel" data-panel="contact" hidden>

@@ -165,6 +165,37 @@ em {
 a.work { display: block; text-decoration: none; transition: transform 0.3s var(--ease); }
 a.work:hover { transform: translateY(-3px); }
 
+/* ---------- About me: words on the left, Karol on the right ---------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr minmax(120px, 34%);
+  gap: 24px;
+  align-items: start;
+}
+.about__sub {
+  font-size: 13px; font-weight: 400;
+  margin: 18px 0 4px;
+  opacity: 0.7;
+}
+.about__karol { margin: 0; text-align: center; }
+.about__karol img { display: block; width: 100%; height: auto; }  /* karol.svg wags its own tail */
+.about__karol figcaption { font-size: 13px; font-weight: 200; opacity: 0.6; margin-top: 6px; }
+
+/* ---------- Favourite movies ---------- */
+.films { list-style: none; }
+.film {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px 16px; flex-wrap: wrap;
+  padding: 14px 0;
+  border-top: 1px solid var(--hair);
+}
+.film__title {
+  font-family: var(--display);
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.2;
+}
+.film__meta { font-size: 14px; opacity: 0.55; }
+
 /* ---------- The letter (contact form) ---------- */
 .letter { display: flex; flex-direction: column; gap: 18px; }
 .letter[hidden] { display: none; }
