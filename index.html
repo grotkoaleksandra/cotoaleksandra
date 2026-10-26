@@ -5,10 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cotoaleksandra ✳ odd little things, made sincerely</title>
   <meta name="description" content="Aleksandra makes odd little things on the internet — apps, websites and ideas that actually ship.">
+  <!-- Who this site belongs to, for search engines. sameAs lists her own profiles
+       (the same ones linked with rel="me" in the footers below). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aleksandra Grotkowska",
+    "alternateName": ["Ola Grotkowska", "cotoaleksandra"],
+    "url": "https://cotoaleksandra.com/",
+    "sameAs": [
+      "https://www.instagram.com/cotoaleksandra",
+      "https://github.com/grotkoaleksandra"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@200..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="home.css?v=11">
+  <link rel="stylesheet" href="home.css?v=20">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
@@ -23,44 +38,108 @@
       <a href="#about" data-go="about">about me</a>
       <a href="#contact" data-go="contact">contact</a>
     </nav>
-    <div class="side__foot">
-      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">instagram</a>
-      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">github</a>
-    </div>
+    <!-- rel="me": these profiles belong to the person who owns this site. -->
+    <footer class="side__foot">
+      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="me noopener">instagram</a>
+      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="me noopener">github</a>
+      <a href="https://buycoffee.to/cotoaleksandra" target="_blank" rel="noopener">buy me a coffee</a>
+    </footer>
   </aside>
 
   <!-- The middle: one category at a time, everything in boxes -->
   <main class="stage">
 
-    <section class="panel" data-panel="hello">
-      <article class="box box--blank" aria-hidden="true"></article>
-    </section>
-
-    <section class="panel" data-panel="showcase" hidden>
-      <article class="box">
-        <p class="kicker">showcase</p>
-        <p class="section__note">exhibits pending — the good stuff is being framed as we speak.</p>
+    <section class="panel" id="hello" data-panel="hello">
+      <article class="box clients">
+        <p class="kicker">worked with</p>
+        <div class="clients__strip">
+          <!-- Four copies: two per half, so the loop never shows a gap on narrow screens. -->
+          <ul class="clients__track">
+            <li><img src="logos/piekna-gallery.png" alt="Piękna Gallery" width="422" height="240"></li>
+            <li><img src="logos/usta.svg" alt="Usta Magazine" width="140" height="74"></li>
+            <li><img class="is-round" src="logos/laka-i-las.png" alt="Łąka i Las" width="240" height="240"></li>
+            <li aria-hidden="true"><img src="logos/piekna-gallery.png" alt="" width="422" height="240"></li>
+            <li aria-hidden="true"><img src="logos/usta.svg" alt="" width="140" height="74"></li>
+            <li aria-hidden="true"><img class="is-round" src="logos/laka-i-las.png" alt="" width="240" height="240"></li>
+            <li aria-hidden="true"><img src="logos/piekna-gallery.png" alt="" width="422" height="240"></li>
+            <li aria-hidden="true"><img src="logos/usta.svg" alt="" width="140" height="74"></li>
+            <li aria-hidden="true"><img class="is-round" src="logos/laka-i-las.png" alt="" width="240" height="240"></li>
+            <li aria-hidden="true"><img src="logos/piekna-gallery.png" alt="" width="422" height="240"></li>
+            <li aria-hidden="true"><img src="logos/usta.svg" alt="" width="140" height="74"></li>
+            <li aria-hidden="true"><img class="is-round" src="logos/laka-i-las.png" alt="" width="240" height="240"></li>
+          </ul>
+        </div>
       </article>
-      <div class="works">
-        <article class="box work">
-          <div class="work__media" aria-hidden="true"><span>image or video</span></div>
-          <p class="kicker">no. 1 · a lovely little app</p>
-          <h2 class="work__name">Untitled, <em>for now</em></h2>
-        </article>
-        <article class="box work">
-          <div class="work__media" aria-hidden="true"><span>image or video</span></div>
-          <p class="kicker">no. 2 · website with feelings</p>
-          <h2 class="work__name">A secret, <em>politely kept</em></h2>
-        </article>
-        <article class="box work">
-          <div class="work__media" aria-hidden="true"><span>image or video</span></div>
-          <p class="kicker">no. 3 · tool, suspiciously useful</p>
-          <h2 class="work__name">Working <em>title</em></h2>
-        </article>
-      </div>
     </section>
 
-    <section class="panel" data-panel="about" hidden>
+    <section class="panel" id="showcase" data-panel="showcase">
+      <!-- One folder per project or brand; its tabs are the things made for it (home.js switches them). -->
+        <article class="box folders" aria-label="Tarocik">
+          <div class="folders__tabs" role="tablist" aria-label="What I made for Tarocik">
+            <button class="folders__tab" role="tab" id="tab-tarocik-website" aria-controls="folder-tarocik-website" aria-selected="true" style="--folder: #bdb8f3">website</button>
+            <button class="folders__tab" role="tab" id="tab-tarocik-card-art" aria-controls="folder-tarocik-card-art" aria-selected="false" style="--folder: #f5c4d4">card art</button>
+          </div>
+          <div class="folder" role="tabpanel" id="folder-tarocik-website" aria-labelledby="tab-tarocik-website" style="--folder: #bdb8f3">
+            <div class="folder__text">
+              <p class="kicker">my own project</p>
+              <h2 class="folder__name">Tarocik</h2>
+              <p class="folder__about">Tarot online: card of the day, interactive readings and the meanings of all 78 cards, in Polish and English.</p>
+              <a class="folder__link" href="https://tarocik.com" target="_blank" rel="noopener">tarocik.com ↗</a>
+            </div>
+            <div class="folder__media"><img src="work/tarocik.png" alt="Tarocik’s banner: two tarot cards and the line “Zapytaj karty, posłuchaj siebie”" width="1200" height="630" loading="lazy"></div>
+          </div>
+          <div class="folder" role="tabpanel" id="folder-tarocik-card-art" aria-labelledby="tab-tarocik-card-art" style="--folder: #f5c4d4">
+            <div class="folder__text">
+              <p class="kicker">my own project</p>
+              <h2 class="folder__name">Tarocik</h2>
+              <p class="folder__about">Original art for every one of the 78 cards.</p>
+              <a class="folder__link" href="https://tarocik.com" target="_blank" rel="noopener">tarocik.com ↗</a>
+            </div>
+            <div class="folder__media"><span>image or video</span></div>
+          </div>
+        </article>
+        <article class="box folders" aria-label="Piękna Gallery">
+          <div class="folders__tabs" role="tablist" aria-label="What I made for Piękna Gallery">
+            <button class="folders__tab" role="tab" id="tab-piekna-work" aria-controls="folder-piekna-work" aria-selected="true" style="--folder: #f5c4d4">the work</button>
+          </div>
+          <div class="folder" role="tabpanel" id="folder-piekna-work" aria-labelledby="tab-piekna-work" style="--folder: #f5c4d4">
+            <div class="folder__text">
+              <p class="kicker">contemporary art gallery, Warsaw</p>
+              <h2 class="folder__name">Piękna Gallery</h2>
+              <a class="folder__link" href="https://pieknagallery.pl" target="_blank" rel="noopener">pieknagallery.pl ↗</a>
+            </div>
+            <div class="folder__media"><span>image or video</span></div>
+          </div>
+        </article>
+        <article class="box folders" aria-label="Usta Magazine">
+          <div class="folders__tabs" role="tablist" aria-label="What I made for Usta Magazine">
+            <button class="folders__tab" role="tab" id="tab-usta-work" aria-controls="folder-usta-work" aria-selected="true" style="--folder: #a9d3f3">the work</button>
+          </div>
+          <div class="folder" role="tabpanel" id="folder-usta-work" aria-labelledby="tab-usta-work" style="--folder: #a9d3f3">
+            <div class="folder__text">
+              <p class="kicker">magazine</p>
+              <h2 class="folder__name">Usta Magazine</h2>
+              <a class="folder__link" href="https://ustamagazyn.pl" target="_blank" rel="noopener">ustamagazyn.pl ↗</a>
+            </div>
+            <div class="folder__media"><span>image or video</span></div>
+          </div>
+        </article>
+        <article class="box folders" aria-label="Łąka i Las">
+          <div class="folders__tabs" role="tablist" aria-label="What I made for Łąka i Las">
+            <button class="folders__tab" role="tab" id="tab-laka-work" aria-controls="folder-laka-work" aria-selected="true" style="--folder: #c6e6bd">the work</button>
+          </div>
+          <div class="folder" role="tabpanel" id="folder-laka-work" aria-labelledby="tab-laka-work" style="--folder: #c6e6bd">
+            <div class="folder__text">
+              <p class="kicker">plant & wellness shop</p>
+              <h2 class="folder__name">Łąka i Las</h2>
+              <a class="folder__link" href="https://lakailas.pl" target="_blank" rel="noopener">lakailas.pl ↗</a>
+            </div>
+            <div class="folder__media"><span>image or video</span></div>
+          </div>
+        </article>
+    </section>
+
+    <section class="panel" id="about" data-panel="about">
       <article class="box about">
         <div class="about__text">
           <p class="kicker">about me</p>
@@ -81,10 +160,11 @@
       </article>
     </section>
 
-    <section class="panel" data-panel="contact" hidden>
+    <section class="panel" id="contact" data-panel="contact">
       <article class="box">
         <p class="kicker">contact</p>
         <p class="lede"><a href="mailto:cotoaleksandra@gmail.com">cotoaleksandra@gmail.com</a> — replies arrive somewhere between <em>promptly</em> and <em>eventually.</em></p>
+        <p class="coffee"><a href="https://buycoffee.to/cotoaleksandra" target="_blank" rel="noopener">buy me a coffee ↗</a></p>
       </article>
 
       <!-- Appears only once Supabase is connected (shared/page.js). -->
@@ -116,7 +196,14 @@
 
   </main>
 
-  <script src="home.js?v=2"></script>
+  <!-- Phones hide the side list's footer, so they get this one instead. -->
+  <footer class="site-foot">
+    <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="me noopener">instagram</a>
+    <a href="https://github.com/grotkoaleksandra" target="_blank" rel="me noopener">github</a>
+    <a href="https://buycoffee.to/cotoaleksandra" target="_blank" rel="noopener">buy me a coffee</a>
+  </footer>
+
+  <script src="home.js?v=7"></script>
   <script type="module" src="shared/page.js"></script>
 </body>
 </html>
