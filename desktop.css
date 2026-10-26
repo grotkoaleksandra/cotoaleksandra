@@ -1,0 +1,295 @@
+/* ============================================
+   cotoaleksandra — the desktop
+   A menu bar, folder icons, windows you can drag,
+   and Karol showing people around.
+   (admin/ and login/ still use styles.css.)
+   ============================================ */
+
+:root {
+  --ink: #191410;
+  --paper: #fffdf9;
+  --wall: #f7cfdc;          /* desktop wallpaper: her pink */
+  --wall-dot: #eebccd;
+  --accent: #d9481f;
+  --hair: rgba(25, 20, 16, 0.14);
+  --bar-h: 34px;
+
+  --display: "Fraunces", Georgia, serif;
+  --sans: "Archivo", "Helvetica Neue", sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow: 4px 4px 0 var(--ink);   /* hard, printed-looking shadow */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background-color: var(--wall);
+  background-image: radial-gradient(var(--wall-dot) 1.2px, transparent 1.4px);
+  background-size: 18px 18px;
+  line-height: 1.5;
+  overflow: hidden;                 /* the desktop is one screen; windows scroll inside */
+}
+
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+em { font-family: var(--display); font-style: italic; font-variation-settings: "SOFT" 60, "WONK" 1; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.kicker {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 10px;
+}
+
+/* ---------- Menu bar ---------- */
+.menubar {
+  position: fixed; inset: 0 0 auto 0; z-index: 1000;
+  height: var(--bar-h);
+  display: flex; align-items: center; gap: 22px;
+  padding: 0 16px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+}
+.menubar__logo { font-size: 14px; font-weight: 600; }
+.menubar__logo em { font-weight: 400; }
+.menubar__nav { display: flex; gap: 18px; }
+.menubar__nav button, .menubar__right a { font-weight: 300; text-decoration: none; opacity: 0.75; }
+.menubar__nav button:hover, .menubar__right a:hover { opacity: 1; }
+.menubar__right { margin-left: auto; display: flex; gap: 18px; align-items: center; }
+.menubar__clock { font-variant-numeric: tabular-nums; font-weight: 500; }
+
+/* ---------- The desk and its icons ---------- */
+.desk {
+  position: fixed; inset: var(--bar-h) 0 0 0;
+}
+
+.icons {
+  position: absolute; top: 24px; right: 24px; bottom: 24px;
+  display: grid; grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, 104px);
+  grid-auto-columns: 104px; gap: 8px 10px;
+  direction: rtl;                 /* fill columns from the right, like a Mac desktop */
+}
+.icon {
+  direction: ltr;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 8px 4px;
+  border-radius: 8px;
+}
+.icon:hover, .icon.is-active { background: rgba(255, 253, 249, 0.45); }
+.icon__label {
+  font-size: 12px; line-height: 1.25; text-align: center;
+  padding: 1px 5px; border-radius: 4px;
+}
+.icon.is-active .icon__label { background: var(--ink); color: var(--paper); }
+
+/* folder: drawn in CSS, coloured per brand */
+.icon__folder {
+  position: relative; width: 58px; height: 44px; margin-top: 8px;
+  background: var(--c); border: 1.5px solid var(--ink); border-radius: 3px 6px 6px 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.icon__folder::before {
+  content: ""; position: absolute; left: -1.5px; top: -9px;
+  width: 26px; height: 9px;
+  background: var(--c); border: 1.5px solid var(--ink); border-bottom: 0; border-radius: 4px 4px 0 0;
+}
+/* file: a sheet of paper with a folded corner and its extension */
+.icon__file {
+  position: relative; width: 44px; height: 54px;
+  background: var(--paper); border: 1.5px solid var(--ink); border-radius: 2px;
+  box-shadow: 2px 2px 0 var(--ink);
+  clip-path: polygon(0 0, 72% 0, 100% 22%, 100% 100%, 0 100%);
+}
+.icon__file::after {
+  content: attr(data-ext);
+  position: absolute; left: 0; right: 0; bottom: 6px;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: center;
+}
+
+/* ---------- Windows ---------- */
+.window {
+  position: absolute; z-index: 10;
+  width: min(460px, calc(100vw - 32px));
+  max-height: calc(100% - 48px);
+  display: flex; flex-direction: column;
+  background: var(--paper);
+  border: 1.5px solid var(--ink); border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.window--wide { width: min(720px, calc(100vw - 32px)); }
+.window[hidden] { display: none; }
+.window.is-opening { animation: pop 0.22s var(--ease); }
+@keyframes pop { from { transform: scale(0.94); opacity: 0; } }
+
+.window__bar {
+  flex: none;
+  display: flex; align-items: center; gap: 10px;
+  height: 28px; padding: 0 10px;
+  border-bottom: 1.5px solid var(--ink);
+  /* classic pinstripes */
+  background: repeating-linear-gradient(var(--paper) 0 2px, #ece4d6 2px 3px);
+  cursor: grab; user-select: none; touch-action: none;
+}
+.window.is-dragging .window__bar { cursor: grabbing; }
+.window__close {
+  width: 13px; height: 13px; flex: none;
+  border: 1.5px solid var(--ink); border-radius: 50%;
+  background: var(--paper);
+}
+.window__close:hover { background: var(--accent); }
+.window__title {
+  margin: 0 auto; padding: 0 8px;     /* centred on the pinstripes, on a paper label */
+  background: var(--paper);
+  font-size: 12px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.window__bar::after { content: ""; width: 13px; flex: none; }   /* balances the close button */
+.window__body { overflow: auto; padding: 22px 24px 26px; }
+
+/* read me */
+.welcome__hi { font-family: var(--display); font-size: 34px; line-height: 1.05; }
+.welcome__what { margin-top: 10px; font-size: 15px; }
+.welcome__kicker { margin-top: 22px; }
+.welcome__logos { list-style: none; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.welcome__logos img { display: block; height: 38px; width: auto; }
+.welcome__logos img.is-round { height: 50px; }
+
+/* a brand folder, opened */
+.folder__name { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.05; }
+.folder__did { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.folder__did:empty { display: none; }
+.folder__did li { font-size: 12px; padding: 3px 10px; border: 1px solid var(--ink); border-radius: 999px; }
+.folder__files {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;
+  margin-top: 18px;
+}
+.file { margin: 0; }
+.file--wide { grid-column: 1 / -1; }
+.file img, .file video { display: block; width: 100%; height: auto; border: 1px solid var(--hair); border-radius: 4px; }
+.file figcaption { font-size: 12px; opacity: 0.6; margin-top: 6px; }
+.file--soon {
+  display: grid; place-items: center; min-height: 120px;
+  border: 1.5px dashed var(--hair); border-radius: 6px;
+  font-size: 12px; font-weight: 300; opacity: 0.7;
+}
+.folder__link { display: inline-block; margin-top: 16px; font-size: 13px; text-decoration: none; opacity: 0.7; }
+.folder__link:hover { opacity: 1; }
+
+/* showreel */
+.reel {
+  aspect-ratio: 16 / 9; display: grid; place-items: center;
+  background: var(--ink); color: var(--paper); border-radius: 6px;
+  font-size: 13px; font-weight: 300;
+}
+
+/* about me */
+.about { display: grid; grid-template-columns: 1fr 40%; gap: 20px; align-items: start; }
+.about__line { font-size: 15px; }
+.about__sub { font-size: 12px; opacity: 0.55; margin: 18px 0 4px; }
+.films { list-style: none; }
+.film { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 6px 0; border-top: 1px solid var(--hair); }
+.film__title { font-family: var(--display); font-size: 17px; }
+.film__meta { font-size: 12px; opacity: 0.55; }
+.about__karol { margin: 0; text-align: center; }
+.about__karol img { width: 100%; height: auto; }
+.about__karol figcaption { font-size: 12px; font-weight: 300; opacity: 0.6; }
+
+/* contact */
+.contact__mail { font-family: var(--display); font-size: 22px; }
+.contact__coffee { margin-top: 6px; font-size: 13px; }
+.contact__coffee a { text-decoration: none; opacity: 0.65; }
+.letter { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
+.letter[hidden] { display: none; }
+.letter__field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.letter__field span { opacity: 0.55; }
+.letter__field input, .letter__field textarea {
+  font: inherit; font-size: 15px; color: var(--ink);
+  background: transparent; border: 0; border-bottom: 1px solid var(--hair);
+  padding: 5px 0; resize: vertical;
+}
+.letter__field input:focus, .letter__field textarea:focus { outline: none; border-bottom-color: var(--ink); }
+.letter__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.letter__send {
+  align-self: flex-start; font-size: 13px;
+  padding: 8px 18px; border: 1.5px solid var(--ink); border-radius: 999px;
+  background: var(--paper); box-shadow: 2px 2px 0 var(--ink);
+}
+.letter__send:active { transform: translate(2px, 2px); box-shadow: none; }
+.letter__note { font-size: 13px; min-height: 1.3em; }
+.letter__note.ok { color: var(--accent); }
+.letter__note.bad { color: #a8301a; }
+
+/* ---------- Karol, the guide ---------- */
+.karol {
+  position: absolute; z-index: 900;
+  left: 40px; bottom: 28px;
+  width: 132px;
+  transition: left 0.9s var(--ease), top 0.9s var(--ease), bottom 0.9s var(--ease);
+  pointer-events: none;
+}
+.karol__dog { display: block; width: 100%; pointer-events: auto; }
+.karol__dog svg { display: block; width: 100%; height: auto; }
+.karol__bubble {
+  position: absolute; bottom: 100%; left: 50%;
+  width: max-content; max-width: 220px;
+  margin-bottom: 8px; padding: 8px 12px;
+  font-size: 13px; line-height: 1.35;
+  background: var(--paper); border: 1.5px solid var(--ink); border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--ink);
+  transform: translateX(-30%);
+  transition: opacity 0.25s;
+}
+.karol__bubble:empty { opacity: 0; }
+.karol__bubble::after {      /* the little tail of the speech bubble */
+  content: ""; position: absolute; top: 100%; left: 28%;
+  border: 7px solid transparent; border-top-color: var(--ink);
+}
+.karol.is-walking .karol__dog { animation: trot 0.3s ease-in-out infinite alternate; }
+@keyframes trot { to { transform: translateY(-4px) rotate(-2deg); } }
+.karol.is-happy .karol__dog { animation: hop 0.35s ease-out 2; }
+@keyframes hop { 50% { transform: translateY(-10px); } }
+/* asleep: tail still, a quiet "z z z" */
+.karol.is-asleep .karol__dog svg g.t { animation-play-state: paused; }
+.karol.is-asleep .karol__bubble { font-style: italic; opacity: 0.8; }
+
+/* ---------- No JavaScript: everything simply shows, one under another ---------- */
+html:not(.js) body { overflow: auto; }
+html:not(.js) .desk { position: static; padding: calc(var(--bar-h) + 16px) 16px 40px; }
+html:not(.js) .icons, html:not(.js) .karol { display: none; }
+html:not(.js) .window { position: static; width: auto; max-width: 720px; margin: 0 auto 20px; }
+
+/* ---------- Phones: icons in a grid, windows open full screen ---------- */
+@media (max-width: 760px) {
+  body { overflow: auto; }
+  .menubar { gap: 14px; padding: 0 12px; }
+  .menubar__nav, .menubar__right a:not([rel~="me"]) { display: none; }
+  .menubar__right { gap: 12px; }
+  .icons {
+    position: static; direction: ltr;
+    grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); grid-template-rows: none; grid-auto-columns: auto;
+    padding: 20px 12px 200px;
+  }
+  .desk { position: absolute; overflow: auto; }
+  .window, .window--wide {
+    position: fixed; inset: calc(var(--bar-h) + 8px) 8px 8px 8px !important;
+    width: auto; max-height: none;
+  }
+  .window__bar { cursor: default; }
+  .about { grid-template-columns: 1fr; }
+  .about__karol { width: 60%; margin: 0 auto; }
+  .karol { position: fixed; left: auto !important; top: auto !important; right: 12px; bottom: 12px !important; width: 96px; }
+  .karol__bubble { transform: translateX(-75%); max-width: 200px; }
+  .karol__bubble::after { left: 75%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .karol { transition: none; }
+  .window.is-opening, .karol.is-walking .karol__dog, .karol.is-happy .karol__dog { animation: none; }
+}
