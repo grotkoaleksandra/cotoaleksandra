@@ -5,10 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cotoaleksandra ✳ odd little things, made sincerely</title>
   <meta name="description" content="Aleksandra makes odd little things on the internet — apps, websites and ideas that actually ship.">
+  <!-- Who this site belongs to, for search engines. sameAs lists her own profiles
+       (the same ones linked with rel="me" in the footers below). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aleksandra Grotkowska",
+    "alternateName": ["Ola Grotkowska", "cotoaleksandra"],
+    "url": "https://cotoaleksandra.com/",
+    "sameAs": [
+      "https://www.instagram.com/cotoaleksandra",
+      "https://github.com/grotkoaleksandra"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Archivo:wght@200..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="home.css?v=11">
+  <link rel="stylesheet" href="home.css?v=12">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
@@ -23,10 +38,11 @@
       <a href="#about" data-go="about">about me</a>
       <a href="#contact" data-go="contact">contact</a>
     </nav>
-    <div class="side__foot">
-      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="noopener">instagram</a>
-      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="noopener">github</a>
-    </div>
+    <!-- rel="me": these profiles belong to the person who owns this site. -->
+    <footer class="side__foot">
+      <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="me noopener">instagram</a>
+      <a href="https://github.com/grotkoaleksandra" target="_blank" rel="me noopener">github</a>
+    </footer>
   </aside>
 
   <!-- The middle: one category at a time, everything in boxes -->
@@ -115,6 +131,12 @@
     </section>
 
   </main>
+
+  <!-- Phones hide the side list's footer, so they get this one instead. -->
+  <footer class="site-foot">
+    <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="me noopener">instagram</a>
+    <a href="https://github.com/grotkoaleksandra" target="_blank" rel="me noopener">github</a>
+  </footer>
 
   <script src="home.js?v=2"></script>
   <script type="module" src="shared/page.js"></script>
