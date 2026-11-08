@@ -14,13 +14,13 @@ Aleksandra's portfolio and contact site. Static HTML/CSS/JS on GitHub Pages,
 Supabase behind it for the contact form, the work list and a private back
 room. No server anywhere.
 
-**Design (chosen by Aleksandra, 2026-09-30):** a quiet list of categories on
-the left in thin, faded text — *hello / showcase / about me / contact* — and
-the content in white boxes in the middle. The background behind the boxes
-changes colour per category (pink / yellow / blue / green). One category is
-shown at a time, switched by the URL hash (`#showcase` etc.). This replaced the
-earlier cream-and-terracotta scrolling page, which she found ugly. Lives in
-`index.html`, `home.css`, `home.js`.
+**Design (chosen by Aleksandra, 2026-11-08):** the site is a desktop. A menu
+bar on top; folder icons per brand (Tarocik, Piękna Gallery, Usta Magazine,
+Łąka i Las) plus handmade, showreel.mov, about me.txt and contact.txt; each
+opens a draggable window. Dot-drawn Karol (her dog) walks to the icon you point
+at and says what it is, and falls asleep when left alone. Inspired by
+tommybiglow.com (desktop) and sebg.ch (mascot guide). Empty folders are waiting
+for her footage and images. Files: `index.html`, `desktop.css`, `desktop.js`.
 
 - Repo: `github.com/grotkoaleksandra/cotoaleksandra` (public)
 - Live: `https://grotkoaleksandra.github.io/cotoaleksandra/`
