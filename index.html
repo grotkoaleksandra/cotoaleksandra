@@ -23,111 +23,65 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,800;0,900;1,400&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="folio.css?v=1">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
 <body>
 
-  <header class="top">
-    <a class="top__mark" href="#top">coto<span>aleksandra</span></a>
-    <nav class="top__nav" aria-label="Sections">
-      <a href="#work">work</a>
-      <a href="#about">about</a>
-      <a href="#contact">contact</a>
+  <header class="bar">
+    <a href="#top" class="bar__mark">cotoaleksandra</a>
+    <nav class="bar__nav" aria-label="Sections">
+      <a href="#work">( work )</a>
+      <a href="#about">( about )</a>
+      <a href="#contact">( contact )</a>
     </nav>
-    <p class="top__clock">Warsaw <time id="clock"></time></p>
+    <span class="bar__year">2026</span>
   </header>
 
   <main id="top">
 
-    <section class="hero">
-      <h1 class="hero__name">Aleksandra<br>Grotkowska</h1>
-      <p class="hero__role">Digital designer, video editor &amp; art director<span class="cursor" aria-hidden="true"></span></p>
-      <p class="hero__note mono">Also: web design, journalism, things made by hand.</p>
+    <!-- Cover -->
+    <section class="page cover">
+      <h1 class="cover__title">
+        <span class="heavy">ALEKSANDRA</span>
+        <span class="script cover__script">Grotkowska</span>
+      </h1>
+      <p class="paren cover__paren">( cotoaleksandra —<br>digital designer, video editor &amp; art director )</p>
+      <div class="page__foot"><span>design<br>portfolio</span><span>cotoaleksandra</span><span>2026</span></div>
     </section>
 
-    <section class="work" id="work" aria-labelledby="work-title">
-      <header class="section-head">
-        <h2 class="mono" id="work-title">selected work</h2>
-        <p class="mono section-head__count">04 projects</p>
-      </header>
-      <div class="index-head mono" aria-hidden="true">
-        <span>no.</span><span>project</span><span>type</span><span>what I did</span><span></span>
+    <!-- Contents -->
+    <section class="page contents" aria-labelledby="contents-title">
+      <h2 class="contents__title" id="contents-title"><span class="script">Contents</span></h2>
+      <ol class="contents__list"><li><a href="#about"><span class="heavy">ABOUT ME</span><i>p/ 01</i></a></li><li><a href="#work"><span class="heavy">SELECTED WORK</span><i>p/ 02</i></a></li><li><a href="#tarocik"><span class="heavy">TAROCIK</span><i>p/ 03</i></a></li><li><a href="#piekna"><span class="heavy">PIĘKNA GALLERY</span><i>p/ 04</i></a></li><li><a href="#usta"><span class="heavy">USTA MAGAZINE</span><i>p/ 05</i></a></li><li><a href="#laka"><span class="heavy">ŁĄKA I LAS</span><i>p/ 06</i></a></li><li><a href="#contact"><span class="heavy">CONTACT</span><i>p/ 07</i></a></li></ol>
+      <div class="page__foot"><span>design<br>portfolio</span><span>cotoaleksandra</span><span>2026</span></div>
+    </section>
+
+    <!-- About -->
+    <section class="page about" id="about" aria-labelledby="about-title">
+      <div class="page__head"><span>about me</span><span>#01</span></div>
+      <div class="about__grid">
+        <h2 class="about__title" id="about-title"><span class="heavy">MY NAME IS</span> <span class="script">Ola</span></h2>
+        <figure class="pinned">
+          <svg class="pinned__clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 52V12a6 6 0 0 1 12 0v40a9 9 0 0 1-18 0V18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <img src="karol.svg?v=1" alt="Karol, her dog, drawn in dots, wagging his tail" width="460" height="515">
+          <figcaption>karol, studio dog</figcaption>
+        </figure>
+        <div class="about__text">
+          <p>Hi, I’m Aleksandra Grotkowska, Ola for short: a digital designer, web designer, video editor and art director based in Warsaw. I work with galleries, magazines and small brands, and on my own projects.</p>
+          <p class="about__also"><i>Also:</i> journalism, and things made by hand.</p>
+          <p class="about__also"><i>Favourite film:</i> Donnie Darko, 2001.</p>
+        </div>
       </div>
-      <ol class="index">
-        <li class="proj" id="tarocik">
-          <button class="proj__row" aria-expanded="false" aria-controls="tarocik-folder" data-preview="work/tarocik.png">
-            <span class="proj__no">01</span>
-            <span class="proj__name">Tarocik</span>
-            <span class="proj__type">own project</span>
-            <span class="proj__did">website, card art</span>
-            <span class="proj__toggle" aria-hidden="true"></span>
-          </button>
-          <div class="proj__folder" id="tarocik-folder" hidden>
-            <p class="proj__about">A tarot website: card of the day, interactive readings and the meanings of all 78 cards, in Polish and English, with original art for every card.</p>
-            <div class="proj__files">
-              <figure class="proj__file proj__file--wide"><img src="work/tarocik.png" alt="Tarocik’s banner: two tarot cards and the line “Zapytaj karty, posłuchaj siebie”" width="1200" height="630" loading="lazy"><figcaption>tarocik.com, homepage banner</figcaption></figure>
-            </div>
-            <a class="proj__link" href="https://tarocik.com" target="_blank" rel="noopener">tarocik.com ↗</a>
-          </div>
-        </li>
-        <li class="proj" id="piekna">
-          <button class="proj__row" aria-expanded="false" aria-controls="piekna-folder">
-            <span class="proj__no">02</span>
-            <span class="proj__name">Piękna Gallery</span>
-            <span class="proj__type">contemporary art gallery, Warsaw</span>
-            <span class="proj__did">—</span>
-            <span class="proj__toggle" aria-hidden="true"></span>
-          </button>
-          <div class="proj__folder" id="piekna-folder" hidden>
-            
-            <div class="proj__files">
-              <figure class="proj__file proj__file--soon"><span>images coming soon</span></figure>
-            </div>
-            <a class="proj__link" href="https://pieknagallery.pl" target="_blank" rel="noopener">pieknagallery.pl ↗</a>
-          </div>
-        </li>
-        <li class="proj" id="usta">
-          <button class="proj__row" aria-expanded="false" aria-controls="usta-folder">
-            <span class="proj__no">03</span>
-            <span class="proj__name">Usta Magazine</span>
-            <span class="proj__type">magazine</span>
-            <span class="proj__did">—</span>
-            <span class="proj__toggle" aria-hidden="true"></span>
-          </button>
-          <div class="proj__folder" id="usta-folder" hidden>
-            
-            <div class="proj__files">
-              <figure class="proj__file proj__file--soon"><span>images coming soon</span></figure>
-            </div>
-            <a class="proj__link" href="https://ustamagazyn.pl" target="_blank" rel="noopener">ustamagazyn.pl ↗</a>
-          </div>
-        </li>
-        <li class="proj" id="laka">
-          <button class="proj__row" aria-expanded="false" aria-controls="laka-folder">
-            <span class="proj__no">04</span>
-            <span class="proj__name">Łąka i Las</span>
-            <span class="proj__type">plant &amp; wellness shop</span>
-            <span class="proj__did">—</span>
-            <span class="proj__toggle" aria-hidden="true"></span>
-          </button>
-          <div class="proj__folder" id="laka-folder" hidden>
-            
-            <div class="proj__files">
-              <figure class="proj__file proj__file--soon"><span>images coming soon</span></figure>
-            </div>
-            <a class="proj__link" href="https://lakailas.pl" target="_blank" rel="noopener">lakailas.pl ↗</a>
-          </div>
-        </li>
-      </ol>
-      <!-- Follows the cursor over a row that has a preview image (site.js). -->
-      <img class="peek" id="peek" alt="" hidden>
     </section>
 
-    <section class="clients" aria-labelledby="clients-title">
-      <h2 class="mono" id="clients-title">worked with</h2>
+    <!-- Work -->
+    <div class="marquee" id="work" aria-hidden="true"><div class="marquee__track"><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span><span>selected work</span><span class="marquee__dot" aria-hidden="true">( ✳ )</span></div></div>
+    <section class="page clients" aria-labelledby="work-title">
+      <div class="page__head"><span>selected work</span><span>#02</span></div>
+      <h2 class="clients__title" id="work-title"><span class="script script--initial" aria-hidden="true">W</span><span class="heavy"><span class="sr">W</span>ORKED WITH</span></h2>
       <ul class="clients__logos">
         <li><img src="logos/piekna-gallery.png" alt="Piękna Gallery" width="422" height="240"></li>
         <li><img src="logos/usta.svg" alt="Usta Magazine" width="140" height="74"></li>
@@ -135,30 +89,62 @@
       </ul>
     </section>
 
-    <section class="about" id="about" aria-labelledby="about-title">
-      <header class="section-head">
-        <h2 class="mono" id="about-title">about</h2>
-      </header>
-      <div class="about__grid">
-        <div class="about__text">
-          <p class="about__lede">I’m Ola. I design and build websites, edit video and art-direct, for galleries, magazines and small brands, and for my own projects.</p>
-          <dl class="about__facts mono">
-            <dt>based in</dt><dd>Warsaw</dd>
-            <dt>also</dt><dd>journalism, things made by hand</dd>
-            <dt>favourite film</dt><dd><em>Donnie Darko</em> (2001)</dd>
-          </dl>
+    <section class="page proj" id="tarocik" aria-label="Tarocik">
+      <div class="page__head"><span>own project</span><span>#03</span></div>
+      <h3 class="proj__title"><span class="script script--initial" aria-hidden="true">T</span><span class="heavy"><span class="sr">T</span>AROCIK</span></h3>
+      <div class="proj__body">
+        <div class="proj__text">
+          <p class="proj__about">A tarot website I built from scratch: card of the day, interactive readings and the meanings of all 78 cards, in Polish and English, with original art for every card.</p>
+          <ul class="proj__did" aria-label="What I did"><li>( website )</li><li>( card art )</li></ul>
+          <a class="proj__link" href="https://tarocik.com" target="_blank" rel="noopener">tarocik.com ↗</a>
         </div>
-        <figure class="about__karol">
-          <img src="karol.svg?v=1" alt="Karol, her dog, drawn in dots, wagging his tail" width="460" height="515">
-          <figcaption class="mono">karol, studio dog</figcaption>
-        </figure>
+        <div class="proj__shots"><figure class="shot shot--wide"><img src="work/tarocik.png" alt="Tarocik’s banner: two tarot cards and the line “Zapytaj karty, posłuchaj siebie”" width="1200" height="630" loading="lazy"></figure></div>
       </div>
     </section>
 
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <header class="section-head">
-        <h2 class="mono" id="contact-title">contact</h2>
-      </header>
+    <section class="page proj" id="piekna" aria-label="Piękna gallery">
+      <div class="page__head"><span>contemporary art gallery, Warsaw</span><span>#04</span></div>
+      <h3 class="proj__title"><span class="script script--initial" aria-hidden="true">P</span><span class="heavy"><span class="sr">P</span>IĘKNA</span><span class="proj__sub">gallery</span></h3>
+      <div class="proj__body">
+        <div class="proj__text">
+          
+          <ul class="proj__did" aria-label="What I did"></ul>
+          <a class="proj__link" href="https://pieknagallery.pl" target="_blank" rel="noopener">pieknagallery.pl ↗</a>
+        </div>
+        <div class="proj__shots"><figure class="shot shot--soon"><span>( images coming soon )</span></figure></div>
+      </div>
+    </section>
+
+    <section class="page proj" id="usta" aria-label="Usta magazine">
+      <div class="page__head"><span>magazine</span><span>#05</span></div>
+      <h3 class="proj__title"><span class="script script--initial" aria-hidden="true">U</span><span class="heavy"><span class="sr">U</span>STA</span><span class="proj__sub">magazine</span></h3>
+      <div class="proj__body">
+        <div class="proj__text">
+          
+          <ul class="proj__did" aria-label="What I did"></ul>
+          <a class="proj__link" href="https://ustamagazyn.pl" target="_blank" rel="noopener">ustamagazyn.pl ↗</a>
+        </div>
+        <div class="proj__shots"><figure class="shot shot--soon"><span>( images coming soon )</span></figure></div>
+      </div>
+    </section>
+
+    <section class="page proj" id="laka" aria-label="Łąka i las">
+      <div class="page__head"><span>plant &amp; wellness shop</span><span>#06</span></div>
+      <h3 class="proj__title"><span class="script script--initial" aria-hidden="true">Ł</span><span class="heavy"><span class="sr">Ł</span>ĄKA</span><span class="proj__sub">i las</span></h3>
+      <div class="proj__body">
+        <div class="proj__text">
+          
+          <ul class="proj__did" aria-label="What I did"></ul>
+          <a class="proj__link" href="https://lakailas.pl" target="_blank" rel="noopener">lakailas.pl ↗</a>
+        </div>
+        <div class="proj__shots"><figure class="shot shot--soon"><span>( images coming soon )</span></figure></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="page contact" id="contact" aria-labelledby="contact-title">
+      <div class="page__head"><span>contact</span><span>#07</span></div>
+      <h2 class="contact__title" id="contact-title"><span class="heavy">LET’S</span> <span class="script">talk</span></h2>
       <a class="contact__mail" href="mailto:cotoaleksandra@gmail.com">cotoaleksandra@gmail.com</a>
       <!-- Appears only once Supabase is connected (shared/page.js). -->
       <form class="letter" id="contactForm" hidden>
@@ -190,14 +176,13 @@
   </main>
 
   <!-- rel="me": these profiles belong to the person who owns this site. -->
-  <footer class="foot mono">
+  <footer class="foot">
     <span>© 2026 Aleksandra Grotkowska</span>
     <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="me noopener">instagram</a>
     <a href="https://github.com/grotkoaleksandra" target="_blank" rel="me noopener">github</a>
     <a href="https://buycoffee.to/cotoaleksandra" target="_blank" rel="noopener">buy me a coffee</a>
   </footer>
 
-  <script src="site.js?v=1"></script>
   <script type="module" src="shared/page.js"></script>
 </body>
 </html>
