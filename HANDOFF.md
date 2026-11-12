@@ -14,13 +14,18 @@ Aleksandra's portfolio and contact site. Static HTML/CSS/JS on GitHub Pages,
 Supabase behind it for the contact form, the work list and a private back
 room. No server anywhere.
 
-**Design (chosen by Aleksandra, 2026-11-08):** the site is a desktop. A menu
-bar on top; folder icons per brand (Tarocik, Piękna Gallery, Usta Magazine,
-Łąka i Las) plus handmade, showreel.mov, about me.txt and contact.txt; each
-opens a draggable window. Dot-drawn Karol (her dog) walks to the icon you point
-at and says what it is, and falls asleep when left alone. Inspired by
-tommybiglow.com (desktop) and sebg.ch (mascot guide). Empty folders are waiting
-for her footage and images. Files: `index.html`, `desktop.css`, `desktop.js`.
+**Design (chosen by Aleksandra, 2026-11-12):** a printed-folio portfolio,
+modelled on a Behance portfolio she picked (Kate Marynchuk,
+behance.net/gallery/253183531/PORTFOLIO): heavy tight grotesk against a
+flourished script on grey paper, corner "page furniture" (#numbers,
+DESIGN PORTFOLIO, 2026), a contents page, MY NAME IS + Karol, EXPERIENCE &
+CLIENTS with a film-strip photo, black folder tabs per brand, a coloured page
+per brand with tilted stickers, marquee bands, "Thank you FOR SCROLLING", and a
+signed dark footer. Style only — none of Kate's work or text is used.
+Still waiting on her: role + years per client, tools, images/videos per brand,
+a B&W photo of herself. Rejected along the way: pastel scrolling page, desktop
+(pink, 1-bit Mac, Windows 98), a quiet editorial index. Files: `index.html`,
+`folio.css`.
 
 - Repo: `github.com/grotkoaleksandra/cotoaleksandra` (public)
 - Live: `https://grotkoaleksandra.github.io/cotoaleksandra/`

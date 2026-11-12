@@ -36,12 +36,12 @@ written in `index.html` rather than showing something broken. Keep it that way.
 ## Layout
 
 ```
-index.html            the one public page: a desktop (menu bar, folder icons, windows)
-desktop.css           the desktop's look
-desktop.js            windows (open/drag/close, #hash deep links) and Karol the guide
+index.html            the one public page: a printed-folio portfolio (cover, contents,
+                      about, experience, folder tabs, a coloured page per brand, contact)
+folio.css             its look — Inter Tight (heavy) + Monsieur La Doulaise (script), grey paper
 karol.svg             dot-drawn Karol with a CSS-animated wagging tail
 logos/, work/         client logos and project images
-home.css, home.js     the previous scrolling design; no longer loaded
+desktop.*, win98.css, home.* — earlier designs; no longer loaded
 styles.css            the original design; still used by admin/ and login/
 shared/supabase.js    the one client — import it, never build another
 shared/paths.js       site-root helper (the site lives at / and at /cotoaleksandra/)
