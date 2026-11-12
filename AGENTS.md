@@ -42,6 +42,8 @@ folio.css             its look — Inter Tight (heavy) + Monsieur La Doulaise (s
 karol.svg             dot-drawn Karol with a CSS-animated wagging tail
 logos/, work/         client logos and project images
 desktop.*, win98.css, home.* — earlier designs; no longer loaded
+desktop/              the intranet: a Windows 98 desktop (98.css) whose folders open small
+                      sites; locked folders are encrypted (see "Desktop folders" below)
 styles.css            the original design; still used by admin/ and login/
 shared/supabase.js    the one client — import it, never build another
 shared/paths.js       site-root helper (the site lives at / and at /cotoaleksandra/)
@@ -63,3 +65,20 @@ supabase/functions/   edge functions (contact-form)
 - New colours or spacing values become tokens in `:root` first.
 - Paths are relative, because the site is served from the root of
   cotoaleksandra.com and from the `/cotoaleksandra/` subpath on github.io.
+
+## Desktop folders (cotoaleksandra.com/desktop)
+
+A playground and client-prototype drop next to the portfolio (noindex). Each
+folder is an icon in `desktop/index.html`:
+
+- **Open folder:** put a site in `desktop/f/<name>/index.html`, add
+  `<button class="icon" data-folder="<name>" data-title="…" data-src="f/<name>/" data-karol="…">`.
+- **Locked folder:** write the page as ONE self-contained HTML file in
+  `desktop/_src/<name>/index.html` (gitignored, never published), then
+  `node desktop/tools/lock.mjs desktop/_src/<name>/index.html desktop/f/<name>.lock.json '<password>'`
+  and add an icon with `data-lock="f/<name>.lock.json"` (+ `.icon__lock` badge).
+  Record the password in `docs/CREDENTIALS.md`. To change a password, re-run lock.mjs.
+- Locked pages are AES-GCM encrypted (PBKDF2, 310k rounds) and decrypted in the
+  browser; they run in a sandboxed iframe. Fine for prototypes, not for secrets;
+  use real passwords.
+- Direct link to a folder: `cotoaleksandra.com/desktop/#<name>`.

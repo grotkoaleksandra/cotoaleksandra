@@ -1,0 +1,314 @@
+/* ============================================
+   cotoaleksandra — the desktop intranet (Windows 95/98)
+   Lives at /desktop/, next to the portfolio. Folders open small sites in
+   windows; locked folders ask for a password (desktop.js).
+   98.css (loaded first) draws the real controls: windows, title bars,
+   buttons, fields and the pixel MS Sans Serif. This file lays out the
+   desktop, taskbar, Start menu, icons and Karol the assistant.
+   ============================================ */
+
+:root {
+  --teal: #008080;          /* the desktop */
+  --silver: #c0c0c0;        /* windows and the taskbar */
+  --navy: #000080;          /* the active title bar */
+  --tip: #ffffe1;           /* tooltip / assistant yellow */
+  --ink: #000;
+  --taskbar-h: 30px;
+  --display: "Fraunces", Georgia, serif;    /* big headings: her own type, like a document */
+  /* the classic raised and sunken edges */
+  --raised: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  --sunken: inset -1px -1px #fff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--teal);
+  overflow: hidden;                 /* one screen; windows scroll inside */
+  font-size: 12px;
+}
+a { color: #0000ee; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+.kicker { font-size: 11px; color: #404040; margin-bottom: 6px; }
+
+/* ---------- Desktop icons (left column, top down, like Windows) ---------- */
+.desk { position: fixed; inset: 0 0 var(--taskbar-h) 0; }
+
+.icons {
+  position: absolute; top: 10px; left: 8px; bottom: 10px;
+  display: grid; grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, 78px); grid-auto-columns: 84px; gap: 6px 4px;
+}
+.icon {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-width: 0; min-height: 0; padding: 2px;
+  background: none; box-shadow: none; border: 0;
+  font: inherit; color: #fff; cursor: default;
+}
+.icon:focus { outline: none; }
+.icon__label {
+  font-size: 11px; line-height: 1.2; text-align: center;
+  padding: 1px 2px;
+  color: #fff;
+}
+.icon.is-active .icon__label, .icon:focus-visible .icon__label {
+  background: var(--navy); outline: 1px dotted #fff;
+}
+.icon.is-active .icon__folder, .icon.is-active .icon__file { filter: brightness(0.6) sepia(1) hue-rotate(190deg) saturate(4); }
+
+/* the yellow Windows folder, drawn in CSS */
+.icon__folder {
+  position: relative; width: 40px; height: 30px; margin-top: 8px;
+  background: linear-gradient(#ffe68a, #f5c842);
+  border: 1px solid #806000;
+}
+.icon__folder::before {
+  content: ""; position: absolute; left: -1px; top: -6px;
+  width: 16px; height: 6px;
+  background: #f5c842; border: 1px solid #806000; border-bottom: 0;
+}
+/* a document: white page, folded corner, a few lines of "text" */
+.icon__file {
+  position: relative; width: 30px; height: 38px;
+  background:
+    linear-gradient(#000080, #000080) 5px 12px / 16px 1px no-repeat,
+    linear-gradient(#808080, #808080) 5px 16px / 18px 1px no-repeat,
+    linear-gradient(#808080, #808080) 5px 20px / 14px 1px no-repeat,
+    #fff;
+  border: 1px solid #000;
+  clip-path: polygon(0 0, 70% 0, 100% 22%, 100% 100%, 0 100%);
+}
+.icon__file::after {
+  content: attr(data-ext);
+  position: absolute; left: 0; right: 0; bottom: 3px;
+  font-size: 8px; font-weight: bold; text-transform: uppercase; text-align: center; color: #000;
+}
+.icon__file[data-ext="mov"] {
+  background: repeating-linear-gradient(90deg, #000 0 3px, #fff 3px 6px) 0 4px / 100% 4px no-repeat,
+              repeating-linear-gradient(90deg, #000 0 3px, #fff 3px 6px) 0 30px / 100% 4px no-repeat, #404040;
+}
+.icon__file[data-ext="mov"]::after { color: #fff; bottom: 12px; }
+
+/* ---------- Windows (98.css draws the frame and title bar) ---------- */
+.window[data-window] {
+  position: absolute; z-index: 10;
+  width: min(440px, calc(100vw - 24px));
+  max-height: calc(100% - 20px);
+  display: flex; flex-direction: column;
+}
+.window--wide { width: min(700px, calc(100vw - 24px)) !important; }
+.window[hidden] { display: none !important; }
+.window:not(.is-front) .title-bar { background: linear-gradient(90deg, #808080, #b5b5b5); }  /* inactive window */
+.title-bar { cursor: default; user-select: none; touch-action: none; flex: none; }
+.window-body { flex: 1 1 auto; overflow: auto; padding: 14px 16px 18px; background: #fff; box-shadow: var(--sunken); margin: 3px; }
+
+/* read me */
+.welcome__hi { font-family: var(--display); font-size: 30px; font-weight: 400; line-height: 1.1; }
+.welcome__what { margin-top: 8px; font-size: 12px; line-height: 1.5; }
+.welcome__kicker { margin-top: 18px; }
+.welcome__logos { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.welcome__logos img { display: block; height: 34px; width: auto; }
+.welcome__logos img.is-round { height: 46px; }
+
+/* a brand folder, opened */
+.folder__name { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3.6vw, 36px); line-height: 1.05; }
+.folder__did { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+.folder__did:empty { display: none; }
+.folder__did li { padding: 2px 8px; background: var(--silver); box-shadow: var(--raised); }
+.folder__files { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-top: 14px; }
+.file--wide { grid-column: 1 / -1; }
+.file img, .file video { display: block; width: 100%; height: auto; box-shadow: var(--sunken); padding: 2px; background: var(--silver); }
+.file figcaption { font-size: 11px; color: #404040; margin-top: 4px; }
+.file--soon { display: grid; place-items: center; min-height: 110px; background: var(--silver); box-shadow: var(--sunken); color: #404040; }
+.folder__link { display: inline-block; margin-top: 12px; }
+
+/* showreel: an old media player screen */
+.reel { aspect-ratio: 16 / 9; display: grid; place-items: center; background: #000; color: #c0c0c0; box-shadow: var(--sunken); }
+
+/* about me */
+.about { display: grid; grid-template-columns: 1fr 40%; gap: 16px; align-items: start; }
+.about__line { font-size: 12px; line-height: 1.55; }
+.about__sub { color: #404040; margin: 14px 0 4px; }
+.film { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 4px 0; border-top: 1px solid #c0c0c0; }
+.film__title { font-family: var(--display); font-size: 16px; }
+.film__meta { color: #404040; }
+.about__karol { text-align: center; }
+.about__karol img { width: 100%; height: auto; }
+.about__karol figcaption { color: #404040; font-size: 11px; }
+
+/* contact */
+.contact__mail { font-family: var(--display); font-size: 20px; }
+.contact__coffee { margin-top: 4px; }
+.letter { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.letter[hidden] { display: none; }
+.letter__field { display: flex; flex-direction: column; gap: 3px; }
+.letter__field input, .letter__field textarea { width: 100%; }
+.letter__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.letter__send { align-self: flex-start; }
+.letter__note { min-height: 1.3em; }
+.letter__note.ok { color: #008000; }
+.letter__note.bad { color: #a00000; }
+
+/* ---------- Taskbar and Start menu ---------- */
+.taskbar {
+  position: fixed; inset: auto 0 0 0; z-index: 1000;
+  height: var(--taskbar-h);
+  display: flex; align-items: center; gap: 4px;
+  padding: 2px 2px 2px 2px;
+  background: var(--silver);
+  box-shadow: inset 0 1px #dfdfdf, inset 0 2px #fff;
+}
+.start { font-size: inherit; font-weight: normal; }
+.start__button {
+  display: flex; align-items: center; gap: 4px;
+  height: 24px; min-width: 0; padding: 0 8px;
+  font-weight: bold;
+}
+.start__button em { font-style: normal; }
+.start__button[aria-expanded="true"] { box-shadow: var(--sunken); }
+.taskbar__windows { flex: 1; display: flex; gap: 3px; min-width: 0; overflow: hidden; }
+.taskbar__windows button {
+  flex: 0 1 160px; min-width: 60px; height: 24px;
+  text-align: left; padding: 0 6px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.taskbar__windows button.is-front { box-shadow: var(--sunken); font-weight: bold; background: #e0e0e0; }
+.taskbar__tray {
+  display: flex; align-items: center; gap: 10px;
+  height: 24px; padding: 0 8px;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
+}
+.taskbar__tray a { color: #000; text-decoration: none; }
+.taskbar__tray a:hover { text-decoration: underline; }
+.taskbar__clock { font-variant-numeric: tabular-nums; }
+
+.start-menu {
+  position: fixed; z-index: 1001; left: 2px; bottom: calc(var(--taskbar-h) - 2px);
+  display: flex; width: 210px; padding: 3px;
+}
+.start-menu[hidden] { display: none; }
+.start-menu__side {     /* the vertical banner, like "Windows 98" */
+  width: 24px; background: linear-gradient(0deg, #000080, #1084d0);
+  color: #c0c0c0; font-size: 15px; font-weight: bold;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  padding: 8px 0; text-align: left;
+}
+.start-menu__side b { color: #fff; }
+.start-menu__items { flex: 1; padding: 2px 0; }
+.start-menu__items button, .start-menu__items a {
+  display: block; width: 100%; min-height: 0; padding: 6px 10px;
+  text-align: left; background: none; box-shadow: none; border: 0;
+  font: inherit; color: #000; text-decoration: none;
+}
+.start-menu__items button:hover, .start-menu__items a:hover,
+.start-menu__items button:focus, .start-menu__items a:focus { background: var(--navy); color: #fff; outline: none; }
+.start-menu__sep { height: 2px; margin: 3px 4px; box-shadow: inset 0 1px #808080, inset 0 -1px #fff; }
+
+/* ---------- Karol, the assistant (think Clippy, but a dog) ---------- */
+.karol {
+  position: absolute; z-index: 5;           /* on the desktop, behind open windows */
+  left: auto; right: 24px; bottom: 16px;
+  width: 120px;
+  transition: left 0.9s cubic-bezier(0.22, 1, 0.36, 1), top 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.karol__dog { display: block; width: 100%; min-width: 0; min-height: 0; padding: 0; background: none; box-shadow: none; border: 0; pointer-events: auto; }
+.karol__dog:focus { outline: none; }
+.karol__dog:focus-visible { outline: 1px dotted #fff; }
+.karol__dog svg { display: block; width: 100%; height: auto; }
+.karol__bubble {
+  position: absolute; bottom: 100%; right: 10px;
+  width: max-content; max-width: 210px;
+  margin-bottom: 8px; padding: 6px 8px;
+  font-size: 11px; line-height: 1.4;
+  background: var(--tip); border: 1px solid #000;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  border-radius: 6px;                         /* the Office Assistant balloon */
+}
+.karol__bubble:empty { display: none; }
+.karol__bubble::after {
+  content: ""; position: absolute; top: 100%; right: 34px;
+  border: 7px solid transparent; border-top-color: #000;
+}
+.karol.is-walking .karol__dog { animation: trot 0.3s ease-in-out infinite alternate; }
+@keyframes trot { to { transform: translateY(-4px) rotate(-2deg); } }
+.karol.is-happy .karol__dog { animation: hop 0.35s ease-out 2; }
+@keyframes hop { 50% { transform: translateY(-10px); } }
+.karol.is-asleep .karol__dog svg g.t { animation-play-state: paused; }
+.karol.is-asleep .karol__bubble { font-style: italic; }
+
+/* ---------- No JavaScript: windows simply show, one under another ---------- */
+html:not(.js) body { overflow: auto; }
+html:not(.js) .desk { position: static; padding: 12px 12px 50px; }
+html:not(.js) .icons, html:not(.js) .karol, html:not(.js) .start-menu { display: none; }
+html:not(.js) .window[data-window] { position: static; width: auto !important; max-width: 700px; margin: 0 auto 12px; }
+
+/* ---------- Phones: icons in a grid, windows full screen ---------- */
+@media (max-width: 760px) {
+  .icons {
+    position: static; grid-auto-flow: row;
+    grid-template-columns: repeat(4, 1fr); grid-template-rows: none; grid-auto-columns: auto;
+    padding: 12px 6px 180px;
+  }
+  .desk { overflow: auto; }
+  .window[data-window], .window--wide {
+    position: fixed; inset: 6px 6px calc(var(--taskbar-h) + 6px) 6px !important;
+    width: auto !important; max-height: none;
+  }
+  .about { grid-template-columns: 1fr; }
+  .about__karol { width: 60%; margin: 0 auto; }
+  .karol { position: fixed; left: auto !important; top: auto !important; right: 10px; bottom: calc(var(--taskbar-h) + 10px) !important; width: 90px; }
+  .taskbar__tray a { display: none; }
+  .taskbar__windows button { flex-basis: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .karol { transition: none; }
+  .karol.is-walking .karol__dog, .karol.is-happy .karol__dog { animation: none; }
+}
+
+/* ---------- Intranet: folders that open sites ---------- */
+.icon { text-decoration: none; }
+.icon__folder { position: relative; }
+/* a padlock badge on locked folders */
+.icon__lock {
+  position: absolute; right: -6px; bottom: -5px;
+  width: 13px; height: 10px; background: #ffd84a; border: 1px solid #000;
+}
+.icon__lock::before {
+  content: ""; position: absolute; left: 2px; top: -7px;
+  width: 7px; height: 7px; border: 1.5px solid #000; border-bottom: 0; border-radius: 5px 5px 0 0;
+}
+/* a shortcut back to the portfolio */
+.icon__shortcut {
+  position: relative; display: grid; place-items: center;
+  width: 34px; height: 34px; margin-top: 4px;
+  background: #fff; border: 1px solid #000; font: bold 20px/1 Tahoma, sans-serif; color: #000;
+}
+.icon__shortcut::after {      /* the little shortcut arrow */
+  content: "↗"; position: absolute; left: -3px; bottom: -3px;
+  width: 12px; height: 12px; background: #fff; border: 1px solid #000; font-size: 9px; line-height: 10px; text-align: center;
+}
+
+/* a folder's window: address bar, the site in a frame, a status bar */
+.folderwin { height: min(600px, calc(100% - 20px)); }
+@media (max-width: 760px) { .folderwin { height: auto; } }   /* full screen on phones */
+.folderwin .window-body { padding: 0; display: flex; }
+.folderwin iframe { flex: 1; width: 100%; height: 100%; border: 0; background: #fff; }
+.folderwin__addr { display: flex; align-items: center; gap: 6px; margin: 2px 3px 0; }
+.folderwin__addr input { flex: 1; }
+.folderwin .status-bar { flex: none; }
+
+/* password dialog */
+.dialog { position: absolute; z-index: 2000; width: min(360px, calc(100vw - 24px)); left: 50%; top: 32%; transform: translate(-50%, -50%); }
+.dialog[hidden] { display: none; }
+.dialog__body { padding: 12px 12px 10px; background: var(--silver); box-shadow: none; margin: 0; }
+.dialog__row { display: flex; gap: 12px; align-items: flex-start; }
+.dialog__key { width: 32px; height: 32px; flex: none; }
+.dialog__row p { margin: 0 0 8px; }
+.dialog__error { min-height: 1.2em; color: #a00000; margin-top: 6px !important; }
+.dialog__buttons { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
+.dialog.is-shaking { animation: shake 0.3s; }
+@keyframes shake { 25% { margin-left: -6px; } 75% { margin-left: 6px; } }

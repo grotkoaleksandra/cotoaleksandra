@@ -3,3 +3,6 @@ node_modules/
 docs/CREDENTIALS.md
 .env
 .env.*
+
+# Unencrypted sources of password-locked desktop folders: never publish these.
+desktop/_src/
