@@ -139,7 +139,8 @@ ul, ol { list-style: none; }
 .filmstrip img { display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.1); }
 .filmstrip__clip { position: absolute; top: -26px; right: 22%; width: 18px; height: 52px; color: #9a9893; z-index: 1; }
 .exp__list li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
-.exp__name { font-weight: 800; letter-spacing: -0.03em; }
+.exp__name { font-weight: 800; letter-spacing: -0.03em; display: flex; justify-content: space-between; gap: 12px; }
+.exp__years { font-weight: 400; font-style: italic; letter-spacing: 0; white-space: nowrap; }
 .exp__role { font-style: italic; }
 .exp__what { opacity: 0.85; }
 
