@@ -70,3 +70,15 @@ Without them the form still works — notes land in the database and show up in
 the back room, they just don't email anyone.
 
 Record every key in `docs/CREDENTIALS.md`, which is gitignored.
+
+## Staying awake (added 2026-11-13)
+
+Free Supabase projects pause after ~7 idle days, which silently broke the
+contact form once. `.github/workflows/keepalive.yml` calls the `keepalive`
+edge function every 2 days (JWT verification off). If the project is paused
+or the contact form stops answering, the run fails and GitHub emails Ola;
+resume the project from the dashboard. The workflow also resets GitHub's
+60-day "inactive repo" timer so the schedule never switches itself off.
+
+Only cotoaleksandra is active; uczta and burn-yer-boats were paused on
+2026-11-13 to stay within the free plan's 2 active projects.
