@@ -104,10 +104,13 @@ ul, ol { list-style: none; }
 
 /* ---------- 3 · About ---------- */
 .about__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 5vw, 80px); }
-.about__title { display: flex; flex-direction: column; }
+.about__title { display: flex; flex-direction: column; position: relative; z-index: 1; }
 .about__title .heavy { font-size: clamp(48px, 7.4vw, 130px); }
 .about__title .script { font-size: clamp(110px, 17vw, 300px); margin: -0.2em 0 0 38%; position: relative; z-index: 1; }
-.about__karol { margin: -12% 0 0 4%; width: min(62%, 340px); }
+/* her cut-out sits under the script name, which overlaps it */
+.about__photo { margin: -30% 0 0 -2%; width: min(86%, 580px); }
+.about__photo img { display: block; width: 100%; height: auto; }
+.about__karol { margin-top: clamp(20px, 3vw, 40px); width: min(42%, 180px); }
 .about__karol img { display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.15); }
 .about__karol figcaption { font-size: 12px; font-weight: 500; text-transform: uppercase; margin-top: 4px; }
 .about__right { padding-top: clamp(4px, 1vw, 14px); font-size: clamp(14px, 1.15vw, 17px); max-width: 520px; }
@@ -184,7 +187,6 @@ ul, ol { list-style: none; }
 .folder__kind { grid-column: 1 / -1; font-weight: 500; opacity: 0.85; }
 .folder__files { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 760px; }
 .folder__files img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 30% 50%; border: 1px solid var(--rule); }
-.folder__soon { display: grid; place-items: center; aspect-ratio: 4 / 5; border: 1px dashed var(--rule); font-size: 11px; font-weight: 500; text-transform: uppercase; color: var(--mute); }
 
 /* ---------- A coloured page per brand ---------- */
 .brand { background: var(--bg); color: var(--fg); --rule: color-mix(in srgb, var(--fg) 30%, transparent); }
@@ -291,7 +293,8 @@ ul, ol { list-style: none; }
   .contents__small, .contents__name { display: none; }
   .about__grid, .exp__grid, .brand__grid { grid-template-columns: 1fr; }
   .about__title .script { margin-left: 22%; }
-  .about__karol { width: 70%; margin-top: -8%; }
+  .about__photo { width: 100%; margin: -16% 0 0 -4%; }
+  .about__karol { width: 40%; }
   .filmstrip { margin-left: 10%; }
   .folder { grid-template-columns: 1fr; }
   .folder__files { grid-template-columns: repeat(3, minmax(0, 1fr)); }
