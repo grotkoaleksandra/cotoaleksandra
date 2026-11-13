@@ -55,7 +55,7 @@
 
     <!-- 2 · Contents -->
     <section class="page contents" aria-labelledby="contents-title">
-      <ol class="contents__list"><li><a href="#about"><span class="heavy">ABOUT ME</span><i>p/ 3</i></a></li><li><a href="#experience"><span class="heavy">EXPERIENCE<br>&amp; CLIENTS</span><i>p/ 4</i></a></li><li><a href="#work"><span class="heavy">SELECTED WORK</span><i>p/ 5–6</i></a></li><li><a href="#tarocik"><span class="heavy">TAROCIK</span><i>p/ 7</i></a></li><li><a href="#piekna"><span class="heavy">PIĘKNA GALLERY</span><i>p/ 8</i></a></li><li><a href="#usta"><span class="heavy">USTA MAGAZINE</span><i>p/ 9</i></a></li><li><a href="#laka"><span class="heavy">ŁĄKA I LAS</span><i>p/ 10</i></a></li><li><a href="#contact"><span class="heavy">CONTACT</span><i>p/ 12</i></a></li></ol>
+      <ol class="contents__list"><li><a href="#about"><span class="heavy">ABOUT ME</span><i>p/ 3</i></a></li><li><a href="#experience"><span class="heavy">EXPERIENCE<br>&amp; CLIENTS</span><i>p/ 4</i></a></li><li><a href="#work"><span class="heavy">SELECTED WORK</span><i>p/ 5–6</i></a></li><li><a href="#tarocik"><span class="heavy">TAROCIK</span><i>p/ 7</i></a></li><li><a href="#contact"><span class="heavy">CONTACT</span><i>p/ 9</i></a></li></ol>
       <div class="contents__mark">
         <span class="contents__small">design<br>portfolio</span>
         <h2 class="script contents__script" id="contents-title">Contents</h2>
@@ -140,12 +140,12 @@
       <div class="page__head"><span>selected work</span><span>#5</span></div>
       <div class="opener__body">
         <h2 class="opener__title" id="work-title"><span class="script script--initial" aria-hidden="true">S</span><span class="heavy"><span class="sr">S</span>ELECTED</span><span class="sr"> </span><span class="script opener__tail">work</span></h2>
-        <p>Websites, video and visual identities for galleries, magazines and small brands, and my own projects. One folder per brand: open one to see what I made.</p>
+        <p>Websites, video and visual identities for galleries, magazines and small brands, and my own projects. Open the folder to see what I made. More on the way.</p>
       </div>
       <div class="page__foot"><span>design<br>portfolio</span><span>cotoaleksandra</span><span>2026</span></div>
     </section>
 
-    <!-- 6 · One folder per brand -->
+    <!-- 6 · Brand folders -->
     <section class="page folders" aria-label="Brands">
       <div class="page__head"><span>selected<br>work</span><span>#6</span></div>
       <ul class="folders__list folders__list--single">
@@ -169,6 +169,10 @@
       </div>
       <div class="page__foot"><span>design<br>portfolio</span><span>cotoaleksandra</span><span>2026</span></div>
     </section>
+    <!-- Hidden until images arrive: Piękna Gallery, Usta Magazine, Łąka i Las.
+         To bring one back, move its band + section out of this <template>, add it to the
+         Contents list and renumber the #N page heads. -->
+    <template id="brands-coming-soon">
     <div class="band" aria-hidden="true"><div class="band__track"><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span><span class="band__word">Piękna Gallery</span><span class="band__paren">(<span class="band__thumb">✳</span>)</span></div></div>
     <section class="page brand" id="piekna" style="--bg: #2c2b28; --fg: #ecebe7" aria-label="Piękna Gallery">
       <div class="page__head"><span>selected work</span><span>#8</span></div>
@@ -208,6 +212,7 @@
       </div>
       <div class="page__foot"><span>design<br>portfolio</span><span>cotoaleksandra</span><span>2026</span></div>
     </section>
+    </template>
 
     <!-- Thank you -->
     <section class="page thanks" aria-label="Thank you">
@@ -218,7 +223,7 @@
 
     <!-- Contact -->
     <section class="page contact" id="contact" aria-labelledby="contact-title">
-      <div class="page__head"><span>contact</span><span>#12</span></div>
+      <div class="page__head"><span>contact</span><span>#9</span></div>
       <h2 class="contact__title" id="contact-title"><span class="heavy">LET’S</span><span class="script">talk</span></h2>
       <a class="contact__mail" href="mailto:cotoaleksandra@gmail.com">cotoaleksandra@gmail.com</a>
       <!-- Appears only once Supabase is connected (shared/page.js). -->
