@@ -187,6 +187,11 @@ ul, ol { list-style: none; }
 .folder__kind { grid-column: 1 / -1; font-weight: 500; opacity: 0.85; }
 .folder__files { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 760px; }
 .folder__files img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 30% 50%; border: 1px solid var(--rule); }
+/* a single folder: tab beside one large screenshot, centred in the page */
+.folders__list--single { flex: 1; justify-content: center; }
+.folders__list--single .folder { grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); align-items: center; }
+.folders__list--single .folder__files { grid-template-columns: 1fr; max-width: 980px; }
+.folders__list--single .folder__files img { aspect-ratio: auto; transform: rotate(-1.2deg); box-shadow: 0 26px 40px -24px rgba(0, 0, 0, 0.45); }
 
 /* ---------- A coloured page per brand ---------- */
 .brand { background: var(--bg); color: var(--fg); --rule: color-mix(in srgb, var(--fg) 30%, transparent); }
@@ -298,6 +303,9 @@ ul, ol { list-style: none; }
   .filmstrip { margin-left: 10%; }
   .folder { grid-template-columns: 1fr; }
   .folder__files { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .folders__list--single .folder { grid-template-columns: 1fr; align-items: start; }
+  .folders__list--single .folder__tab { max-width: 260px; }
+  .folders__list--single .folder__files { grid-template-columns: 1fr; }
   .shot--hero, .shot--soon { width: 100%; }
   .thanks__script { white-space: normal; }
   .letter { grid-template-columns: 1fr; }
