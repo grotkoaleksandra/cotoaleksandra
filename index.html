@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,800;0,900;1,400&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="folio.css?v=4">
+  <link rel="stylesheet" href="folio.css?v=5">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
 </head>
@@ -269,6 +269,18 @@
 
   <!-- Signed off, like the last page of a printed folio. rel="me": her own profiles. -->
   <footer class="sign">
+    <!-- "Keep up" sign-up. Shown only when NEWSLETTER_OPEN is true in shared/supabase.js. -->
+    <form class="keepup" id="keepupForm" hidden>
+      <h2 class="keepup__title"><span class="heavy">KEEP UP</span> <span class="script">with me</span></h2>
+      <p class="keepup__what">New work, side projects, the odd letter. Rarely, never spam.</p>
+      <div class="keepup__row">
+        <label class="keepup__label" for="keepupEmail">your email</label>
+        <input id="keepupEmail" type="email" name="email" autocomplete="email" placeholder="your email" required>
+        <button class="keepup__send" type="submit">sign me up ✳</button>
+      </div>
+      <label class="letter__hp" aria-hidden="true">leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <p class="keepup__note" id="keepupNote" role="status" aria-live="polite"></p>
+    </form>
     <p class="script sign__name">cotoaleksandra</p>
     <nav class="sign__links" aria-label="Elsewhere">
       <a href="https://www.instagram.com/cotoaleksandra" target="_blank" rel="me noopener">instagram</a>

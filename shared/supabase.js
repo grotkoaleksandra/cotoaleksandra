@@ -64,4 +64,8 @@ if (CONFIGURED && typeof document !== 'undefined') {
   });
 }
 
-export { supabase, SUPABASE_URL, SUPABASE_ANON_KEY, CONFIGURED, CONTACT_READY };
+// Flip to true once RESEND_API_KEY is set on the newsletter-signup function:
+// that's what makes the "keep up with me" box appear in the footer.
+const NEWSLETTER_OPEN = false;
+
+export { supabase, SUPABASE_URL, SUPABASE_ANON_KEY, CONFIGURED, CONTACT_READY, NEWSLETTER_OPEN };

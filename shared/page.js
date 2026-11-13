@@ -1,11 +1,13 @@
 // Wires the public page to Supabase — but only when it's connected.
 // Nothing here changes the page until real keys are in shared/supabase.js.
-import { CONFIGURED, CONTACT_READY } from './supabase.js';
+import { CONFIGURED, CONTACT_READY, NEWSLETTER_OPEN } from './supabase.js';
 import { loadProjects } from './projects-service.js';
 import { submitContactForm } from './contact-service.js';
+import { joinNewsletter } from './newsletter-service.js';
 
 if (CONFIGURED) swapInTheWork();
 if (CONTACT_READY) openTheLetterbox();
+if (CONTACT_READY && NEWSLETTER_OPEN) openTheList();
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -62,6 +64,34 @@ function openTheLetterbox() {
       note.textContent = 'Landed. She’ll write back.';
     } else {
       note.className = 'letter__note bad';
+      note.textContent = result.error;
+    }
+  });
+}
+
+// ---- the "keep up with me" list ----
+function openTheList() {
+  const form = document.getElementById('keepupForm');
+  const note = document.getElementById('keepupNote');
+  if (!form) return;
+
+  form.hidden = false;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const send = form.querySelector('button[type="submit"]');
+    const payload = Object.fromEntries(new FormData(form).entries());
+    if (!payload.email) return;
+
+    send.disabled = true;
+    note.textContent = 'adding you…';
+    const result = await joinNewsletter(payload);
+    send.disabled = false;
+
+    if (result.ok) {
+      form.reset();
+      note.textContent = 'You’re on the list. Talk soon ✳';
+    } else {
       note.textContent = result.error;
     }
   });

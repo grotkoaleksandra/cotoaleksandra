@@ -247,6 +247,28 @@ ul, ol { list-style: none; }
 .letter__note { font-size: 13px; min-height: 1.4em; }
 .letter__note.bad { color: #a8301a; }
 
+/* ---------- Keep up (newsletter, in the dark footer) ---------- */
+.keepup { max-width: 720px; margin: 0 auto clamp(40px, 7vw, 80px); }
+.keepup[hidden] { display: none; }
+.keepup__title { display: flex; justify-content: center; align-items: flex-end; flex-wrap: wrap; gap: 0 0.2em; }
+.keepup__title .heavy { font-size: clamp(40px, 7vw, 96px); }
+.keepup__title .script { font-size: clamp(56px, 9vw, 130px); line-height: 0.7; }
+.keepup__what { font-size: 13px; margin-top: 14px; opacity: 0.7; }
+.keepup__row { display: flex; gap: 0; margin-top: 22px; border-bottom: 1px solid var(--paper); }
+.keepup__label { position: absolute; left: -9999px; }
+.keepup__row input {
+  flex: 1; min-width: 0; font: inherit; font-size: 16px; color: var(--paper); background: transparent;
+  border: 0; padding: 10px 0; outline: none;
+}
+.keepup__row input::placeholder { color: var(--paper); opacity: 0.45; text-transform: uppercase; font-size: 12px; font-weight: 500; }
+.keepup__send {
+  font: inherit; font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: -0.02em;
+  color: var(--paper); background: transparent; border: 0; padding: 10px 0 10px 16px; cursor: pointer; white-space: nowrap;
+}
+.keepup__send:hover { font-style: italic; }
+.keepup__send:disabled { opacity: 0.5; cursor: progress; }
+.keepup__note { font-size: 13px; min-height: 1.4em; margin-top: 10px; }
+
 /* ---------- Signed off ---------- */
 .sign { background: var(--band); color: var(--paper); text-align: center; padding: clamp(36px, 6vw, 72px) var(--pad) 22px; }
 .sign__name { font-size: clamp(56px, 8vw, 120px); }
