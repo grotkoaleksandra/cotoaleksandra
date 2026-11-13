@@ -292,7 +292,9 @@ ul, ol { list-style: none; }
   .page { min-height: auto; padding-bottom: 28px; }
   .cover, .thanks { min-height: calc(100svh - 42px); }
   .cover__paren { align-self: center; margin-right: 0; }
-  .contents { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+  .contents { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; }
+  /* the script word is ~3.02em wide: scale it to the content box so it never widens the page */
+  .contents__script { font-size: min(130px, calc((100vw - 36px) / 3.1)); }
   .contents__list { grid-column: 1; }
   .contents__mark { margin-top: 40px; }
   .contents__small, .contents__name { display: none; }
