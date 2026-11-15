@@ -1,4 +1,4 @@
-// Sign-in helpers for the private studio pages. This is a UX gate only —
+// Session helpers for the private pages (sign-in itself lives in admin/admin.js). This is a UX gate only —
 // the real boundary is Row-Level Security on the tables.
 import { supabase, CONFIGURED } from './supabase.js';
 import { path } from './paths.js';
@@ -12,15 +12,6 @@ export async function getSession() {
 
 export async function getUser() {
   return (await getSession())?.user ?? null;
-}
-
-export async function signInWithGoogle(redirectTo = path('admin/')) {
-  if (!CONFIGURED) throw new Error('Supabase is not connected yet');
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: { redirectTo },
-  });
-  if (error) throw error;
 }
 
 export async function signOut() {

@@ -1,10 +1,7 @@
 // The one Supabase client for this site. Import it — never build a second one.
-//
-// The project URL is public. So is the anon key — it is safe in a browser
-// because every table is protected by Row-Level Security — but it still has to
-// be pasted in by hand: Project Settings → API Keys → Legacy → anon.
-const SUPABASE_URL = 'https://vnkwdfbwplgkcjgvvixp.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+// The URL and anon key live in ./config.js (public by design: every table is
+// protected by Row-Level Security).
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
 
 // Two levels of readiness, so the site lights up in the right order.
 //
