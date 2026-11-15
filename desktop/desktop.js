@@ -3,6 +3,12 @@
 // folders hold an encrypted page (tools/lock.mjs) that only opens with its
 // password, decrypted right here in the browser. Links like
 // cotoaleksandra.com/desktop/#demo open that folder straight away.
+//
+// Folders made in /admin/ live in Supabase and are added after the hardcoded
+// icons (see "folders from /admin/" below). If Supabase is down, they simply
+// don't appear; everything hardcoded keeps working.
+
+import { SUPABASE_URL, SUPABASE_ANON_KEY, FUNCTIONS_URL } from '../shared/config.js';
 
 document.documentElement.classList.add('js');
 
@@ -121,7 +127,8 @@ function folderWindow(icon) {
   const name = icon.dataset.folder;
   let win = document.getElementById(`win-${name}`);
   if (win) return win;
-  const locked = !!icon.dataset.lock;
+  const locked = !!(icon.dataset.lock || icon.dataset.locked);
+  const db = !!icon.dataset.db;
   win = document.createElement('section');
   win.className = 'window window--wide folderwin';
   win.id = `win-${name}`;
@@ -134,15 +141,16 @@ function folderWindow(icon) {
       <div class="title-bar-controls"><button aria-label="Maximize" data-full title="Open full screen"></button><button data-close aria-label="Close"></button></div>
     </div>
     <div class="folderwin__addr field-row"><label>Address</label><input type="text" readonly></div>
-    <div class="window-body"><iframe title=""></iframe></div>
+    <div class="window-body">${db ? '<div class="dbfolder"></div>' : '<iframe title=""></iframe>'}</div>
     <div class="status-bar"><p class="status-bar-field"></p><p class="status-bar-field"></p></div>`;
   win.querySelector('.title-bar-text').textContent = icon.dataset.title;
   win.querySelector('.folderwin__addr input').value = `${location.origin}${location.pathname}#${name}`;
-  win.querySelector('iframe').title = icon.dataset.title;
+  if (db) win.classList.add('folderwin--db');
+  else win.querySelector('iframe').title = icon.dataset.title;
   const [left, right] = win.querySelectorAll('.status-bar-field');
   left.textContent = locked ? 'Unlocked folder' : 'Folder';
   right.textContent = locked ? '🔒 private' : 'public';
-  win.querySelector('[data-full]').addEventListener('click', () => openFull(icon));
+  win.querySelector('[data-full]').addEventListener('click', () => (db ? win.classList.toggle('is-max') : openFull(icon)));
   win.hidden = true;
   desk.appendChild(win);
   wireWindow(win);
@@ -151,6 +159,7 @@ function folderWindow(icon) {
 
 function openFolder(icon) {
   const name = icon.dataset.folder;
+  if (icon.dataset.db) { openDbFolder(icon); return; }
   if (icon.dataset.lock && !unlocked.has(name)) { askPassword(icon); return; }
   const win = folderWindow(icon);
   const frame = win.querySelector('iframe');
@@ -215,8 +224,15 @@ pwForm.addEventListener('submit', async (e) => {
   pwOk.disabled = true;
   pwError.textContent = 'Checking…';
   try {
-    const lock = await (await fetch(icon.dataset.lock, { cache: 'no-store' })).json();
-    unlocked.set(icon.dataset.folder, await decrypt(lock, pwInput.value));
+    if (icon.dataset.db) {
+      const res = await openFolderFn(icon.dataset.folder, pwInput.value);
+      if (res.status === 429) { pwError.textContent = 'Too many tries. Wait a few minutes.'; karolSays('easy. wait a bit.'); return; }
+      if (!res.ok) throw new Error('denied');
+      unlocked.set(icon.dataset.folder, await res.json());
+    } else {
+      const lock = await (await fetch(icon.dataset.lock, { cache: 'no-store' })).json();
+      unlocked.set(icon.dataset.folder, await decrypt(lock, pwInput.value));
+    }
     closePassword();
     openFolder(icon);
   } catch {
@@ -300,10 +316,131 @@ function wake() {
 ['pointermove', 'keydown', 'pointerdown'].forEach((t) => addEventListener(t, wake, { passive: true }));
 wake();
 
+// ---- folders from /admin/ (Supabase) ----
+// Icons come from the desktop_folders table (anyone may list them; RLS hides
+// password hashes). Contents, open or locked, come from the open-folder edge
+// function, which hands back short-lived signed links for the images.
+const restHeaders = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
+
+function timeout(ms) {
+  const ctrl = new AbortController();
+  setTimeout(() => ctrl.abort(), ms);
+  return ctrl.signal;
+}
+
+function openFolderFn(slug, password) {
+  return fetch(`${FUNCTIONS_URL}/open-folder`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(password == null ? { slug } : { slug, password }),
+    signal: timeout(20000),
+  });
+}
+
+async function loadDbFolders() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/desktop_folders?select=slug,name,locked,karol&order=sort.asc,created_at.asc`,
+      { headers: restHeaders, signal: timeout(6000) },
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const folders = await res.json();
+    const before = document.querySelector('.icons > a.icon');   // keep the portfolio shortcut last
+    folders.forEach((f) => {
+      if (document.querySelector(`.icon[data-folder="${CSS.escape(f.slug)}"]`)) return;
+      const icon = document.createElement('button');
+      icon.className = 'icon';
+      icon.dataset.folder = f.slug;
+      icon.dataset.title = f.name;
+      icon.dataset.db = '1';
+      if (f.locked) icon.dataset.locked = '1';
+      icon.dataset.karol = f.karol || (f.locked ? 'this one’s locked. ask Ola for the password.' : `${f.name}. open it!`);
+      icon.innerHTML = `<span class="icon__folder">${f.locked ? '<span class="icon__lock" aria-hidden="true"></span>' : ''}</span><span class="icon__label"></span>`;
+      icon.querySelector('.icon__label').textContent = f.name;
+      icon.addEventListener('click', () => openFolder(icon));
+      const point = () => { walkTo(icon); karolSays(icon.dataset.karol); };
+      icon.addEventListener('pointerenter', point);
+      icon.addEventListener('focus', point);
+      before.before(icon);
+    });
+  } catch (err) {
+    console.warn('[desktop] folders from /admin/ unavailable:', err.message);
+  }
+}
+
+async function openDbFolder(icon) {
+  const name = icon.dataset.folder;
+  const locked = !!icon.dataset.locked;
+  if (locked && !unlocked.has(name)) { askPassword(icon); return; }
+  const win = folderWindow(icon);
+  showWindow(win);
+  const box = win.querySelector('.dbfolder');
+  if (!box.dataset.loaded) {
+    let data = unlocked.get(name);
+    if (!data) {
+      box.innerHTML = '<p class="dbfolder__empty">Opening…</p>';
+      try {
+        const res = await openFolderFn(name);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+      } catch {
+        box.innerHTML = '<p class="dbfolder__empty">This folder won’t open right now. Try again in a minute.</p>';
+        return;
+      }
+    }
+    renderDbFolder(box, data.items || []);
+    box.dataset.loaded = '1';
+    win.querySelector('.status-bar-field').textContent = `${(data.items || []).length} object(s)`;
+  }
+  karolSays(locked ? 'you’re in. nice.' : icon.dataset.karol);
+}
+
+function renderDbFolder(box, items) {
+  box.replaceChildren();
+  if (!items.length) {
+    box.innerHTML = '<p class="dbfolder__empty">This folder is empty.</p>';
+    return;
+  }
+  items.forEach((it) => {
+    let el;
+    if (it.type === 'image' && it.src) {
+      el = document.createElement('figure');
+      el.className = 'dbfolder__img';
+      const a = document.createElement('a');
+      a.href = it.src; a.target = '_blank'; a.rel = 'noopener';
+      const img = document.createElement('img');
+      img.src = it.src; img.alt = it.caption || ''; img.loading = 'lazy'; img.decoding = 'async';
+      if (it.width && it.height) { img.width = it.width; img.height = it.height; }
+      a.appendChild(img);
+      el.appendChild(a);
+      if (it.caption) { const c = document.createElement('figcaption'); c.textContent = it.caption; el.appendChild(c); }
+    } else if (it.type === 'text') {
+      el = document.createElement('p');
+      el.className = 'dbfolder__text';
+      el.textContent = it.content;
+    } else if (it.type === 'link' && /^https?:\/\//i.test(it.url || '')) {
+      el = document.createElement('p');
+      el.className = 'dbfolder__link';
+      const a = document.createElement('a');
+      a.href = it.url; a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = it.caption || it.url;
+      el.append('🔗 ', a);
+    }
+    if (el) box.appendChild(el);
+  });
+}
+
 // ---- start: the linked folder or window, or the read me ----
 windows().forEach((w) => { w.hidden = true; });
-const want = location.hash.slice(1);
-const linkedFolder = document.querySelector(`.icon[data-folder="${CSS.escape(want)}"]`);
-if (linkedFolder) openFolder(linkedFolder);
-else if (document.getElementById(want)?.matches('[data-window]')) showWindow(document.getElementById(want));
-else if (!phone.matches) showWindow(document.getElementById('welcome'));
+const want = decodeURIComponent(location.hash.slice(1));
+const findIcon = () => document.querySelector(`.icon[data-folder="${CSS.escape(want)}"]`);
+const dbReady = loadDbFolders();
+if (findIcon()) openFolder(findIcon());
+else if (want && document.getElementById(want)?.matches('[data-window]')) showWindow(document.getElementById(want));
+else if (want) {
+  // Maybe a folder made in /admin/: wait for those (briefly) before giving up.
+  dbReady.then(() => {
+    if (findIcon()) openFolder(findIcon());
+    else if (!phone.matches) showWindow(document.getElementById('welcome'));
+  });
+} else if (!phone.matches) showWindow(document.getElementById('welcome'));

@@ -312,3 +312,16 @@ html:not(.js) .window[data-window] { position: static; width: auto !important; m
 .dialog__buttons { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
 .dialog.is-shaking { animation: shake 0.3s; }
 @keyframes shake { 25% { margin-left: -6px; } 75% { margin-left: 6px; } }
+
+/* ---------- Folders made in /admin/: pictures, notes and links ---------- */
+.folderwin--db .window-body { display: block; padding: 12px; overflow: auto; }
+.folderwin--db.is-max { left: 6px !important; top: 6px !important; width: calc(100% - 12px) !important; height: calc(100% - 12px); }
+.dbfolder { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; align-items: start; }
+.dbfolder__img { margin: 0; }
+.dbfolder__img a { display: block; }
+.dbfolder__img img { display: block; width: 100%; height: auto; padding: 2px; background: var(--silver); box-shadow: var(--sunken); }
+.dbfolder__img figcaption { font-size: 11px; color: #404040; margin-top: 4px; }
+.dbfolder__text, .dbfolder__link, .dbfolder__empty { grid-column: 1 / -1; font-size: 12px; line-height: 1.55; }
+.dbfolder__text { white-space: pre-wrap; padding: 8px 10px; background: var(--tip); border: 1px solid #000; }
+.dbfolder__link a { word-break: break-word; }
+.dbfolder__empty { color: #404040; }
