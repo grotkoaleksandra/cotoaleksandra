@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>admin ✳ cotoaleksandra</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/98.css@0.1.21/dist/98.css">
+  <link rel="stylesheet" href="admin.css?v=1">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
+</head>
+<body>
+
+  <main class="desk">
+
+    <!-- Log on: an emailed link or code, only for the admin address -->
+    <section class="window win" id="login" hidden aria-labelledby="loginTitle">
+      <div class="title-bar">
+        <div class="title-bar-text" id="loginTitle">Log On to cotoaleksandra</div>
+      </div>
+      <div class="window-body">
+        <div class="logon">
+          <svg class="logon__key" viewBox="0 0 32 32" aria-hidden="true"><circle cx="10" cy="16" r="6" fill="#ffd84a" stroke="#000" stroke-width="1.5"/><circle cx="8.5" cy="16" r="1.8" fill="#000"/><path d="M16 16h13v4h-3v-2h-2v3h-3v-3h-5z" fill="#ffd84a" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <div class="logon__main">
+            <form id="emailForm" class="stack">
+              <p>Type your admin email. I’ll send you a sign-in link (and a code).</p>
+              <div class="field-row-stacked">
+                <label for="email">Email:</label>
+                <input id="email" type="email" autocomplete="username" value="cotoaleksandra@gmail.com" required>
+              </div>
+              <div class="buttons"><button type="submit" id="sendBtn" class="default">Send</button></div>
+            </form>
+            <form id="codeForm" class="stack" hidden>
+              <p>Check your inbox. Click the link in the email <b>in this browser</b>, or type the code from it here.</p>
+              <div class="field-row-stacked">
+                <label for="code">Code:</label>
+                <input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" required>
+              </div>
+              <div class="buttons">
+                <button type="submit" class="default">Log on</button>
+                <button type="button" id="backBtn">Back</button>
+              </div>
+            </form>
+            <p class="msg" id="loginMsg" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The folders: list view and inside-a-folder view share one window -->
+    <section class="window win win--wide" id="main" hidden aria-labelledby="mainTitle">
+      <div class="title-bar">
+        <div class="title-bar-text" id="mainTitle">Desktop folders</div>
+      </div>
+      <div class="toolbar">
+        <button id="upBtn" hidden>⬆ Up</button>
+        <button id="newBtn">📁 New folder…</button>
+        <a class="button-link" href="../desktop/" target="_blank" rel="noopener" id="viewLink">View on desktop ↗</a>
+        <span class="toolbar__gap"></span>
+        <button id="logoutBtn">Log off</button>
+      </div>
+      <div id="body">
+        <!-- folder list -->
+        <div id="listView">
+          <ul class="folders" id="folderList"></ul>
+          <p class="hint">These appear on <a href="../desktop/" target="_blank" rel="noopener">/desktop</a> straight away, after Karol, demo and sari (those stay as they are).</p>
+        </div>
+
+        <!-- one folder -->
+        <div id="folderView" hidden>
+          <fieldset>
+            <legend>Folder</legend>
+            <form id="settingsForm" class="grid2">
+              <div class="field-row-stacked"><label for="fName">Name</label><input id="fName" maxlength="60" required></div>
+              <div class="field-row-stacked"><label for="fSlug">Link: /desktop/#…</label><input id="fSlug" maxlength="40" pattern="[a-z0-9][a-z0-9\-]*" required></div>
+              <div class="field-row-stacked span2"><label for="fKarol">What Karol says when you point at it (optional)</label><input id="fKarol" maxlength="160"></div>
+              <div class="buttons span2"><button type="submit">Save</button> <span class="msg" id="settingsMsg"></span></div>
+            </form>
+          </fieldset>
+
+          <fieldset>
+            <legend>Password</legend>
+            <form id="lockForm" class="stack">
+              <p id="lockState"></p>
+              <div class="field-row">
+                <label for="fPass">New password:</label>
+                <input id="fPass" type="text" autocomplete="off" minlength="4" maxlength="200" spellcheck="false" required>
+                <button type="submit" id="lockBtn">Lock</button>
+              </div>
+              <div class="buttons"><button type="button" id="unlockBtn">Remove password (make it open)</button> <span class="msg" id="lockMsg"></span></div>
+            </form>
+          </fieldset>
+
+          <fieldset>
+            <legend>Add</legend>
+            <label class="drop" id="drop">
+              <input type="file" id="files" accept="image/*" multiple>
+              <span><b>Drop pictures here</b> or tap to choose. They’re shrunk to 2000px before upload.</span>
+            </label>
+            <p class="msg" id="uploadMsg" role="status" aria-live="polite"></p>
+            <form id="noteForm" class="stack">
+              <div class="field-row-stacked"><label for="noteText">Note</label><textarea id="noteText" rows="3" maxlength="5000" required></textarea></div>
+              <div class="buttons"><button type="submit">Add note</button></div>
+            </form>
+            <form id="linkForm" class="grid2">
+              <div class="field-row-stacked"><label for="linkUrl">Link</label><input id="linkUrl" type="url" placeholder="https://" required></div>
+              <div class="field-row-stacked"><label for="linkLabel">Label (optional)</label><input id="linkLabel" maxlength="300"></div>
+              <div class="buttons span2"><button type="submit">Add link</button></div>
+            </form>
+          </fieldset>
+
+          <fieldset>
+            <legend>Inside</legend>
+            <ul class="items" id="itemList"></ul>
+          </fieldset>
+        </div>
+      </div>
+      <div class="status-bar">
+        <p class="status-bar-field" id="status">Ready</p>
+        <p class="status-bar-field" id="who"></p>
+      </div>
+    </section>
+
+    <!-- New folder -->
+    <section class="window dialog" id="newDialog" role="dialog" aria-modal="true" aria-labelledby="newTitle" hidden>
+      <div class="title-bar">
+        <div class="title-bar-text" id="newTitle">New folder</div>
+        <div class="title-bar-controls"><button aria-label="Close" data-cancel></button></div>
+      </div>
+      <form class="window-body stack" id="newForm">
+        <div class="field-row-stacked"><label for="nName">Name</label><input id="nName" maxlength="60" required></div>
+        <div class="field-row-stacked"><label for="nSlug">Link: /desktop/#…</label><input id="nSlug" maxlength="40" pattern="[a-z0-9][a-z0-9\-]*" required></div>
+        <div class="field-row-stacked"><label for="nKarol">What Karol says (optional)</label><input id="nKarol" maxlength="160"></div>
+        <div class="field-row"><input type="radio" id="nOpen" name="nKind" value="open" checked><label for="nOpen">Open: anyone with the link</label></div>
+        <div class="field-row"><input type="radio" id="nLocked" name="nKind" value="locked"><label for="nLocked">Locked: needs a password</label></div>
+        <div class="field-row-stacked" id="nPassRow" hidden><label for="nPass">Password (4+ characters)</label><input id="nPass" type="text" autocomplete="off" minlength="4" maxlength="200" spellcheck="false"></div>
+        <p class="msg" id="newMsg"></p>
+        <div class="buttons"><button type="submit" class="default">OK</button><button type="button" data-cancel>Cancel</button></div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="taskbar">
+    <a class="start" href="../desktop/"><span aria-hidden="true">✳</span> coto<b>aleksandra</b></a>
+    <span class="taskbar__title">admin</span>
+    <time class="taskbar__clock" id="clock"></time>
+  </footer>
+
+  <script type="module" src="admin.js?v=1"></script>
+</body>
+</html>
