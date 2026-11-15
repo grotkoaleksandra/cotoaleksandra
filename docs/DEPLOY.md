@@ -46,16 +46,9 @@ org. Done:
   to it without any key
 - ✅ the project URL is in `shared/supabase.js`
 
-## Supabase — what's left
-
-1. **Paste the anon key.** Project Settings → API Keys → "Legacy anon,
-   service_role API keys" → copy `anon` → replace `YOUR_SUPABASE_ANON_KEY` in
-   `shared/supabase.js`. Only the database-backed parts need it: the work list,
-   sign-in and the back room. The contact form already works without it.
-2. **Google sign-in** (only needed for `/admin/`): Authentication → Providers →
-   Google, with a Google Cloud OAuth client whose authorized redirect URI is
-   `https://vnkwdfbwplgkcjgvvixp.supabase.co/auth/v1/callback`. Add the site's
-   own URLs under Authentication → URL Configuration.
+## Supabase — keys
+The URL and the (public) legacy anon key are in `shared/config.js`;
+`shared/supabase.js` builds the one client from them.
 
 ## Edge function secrets
 `supabase secrets set KEY=value`
@@ -82,3 +75,49 @@ resume the project from the dashboard. The workflow also resets GitHub's
 
 Only cotoaleksandra is active; uczta and burn-yer-boats were paused on
 2026-11-13 to stay within the free plan's 2 active projects.
+
+## Admin: desktop folders (added 2026-11-15)
+
+`/admin/` is a private Windows-98-style page (noindex) where Ola makes folders
+for `/desktop`. Changes show up on the desktop at once; no deploy needed.
+
+**Logging in.** Email link or code (Supabase Auth, passwordless). Sign-ups are
+**off**, so only accounts that already exist can ask for a code, and only
+addresses in `site_admins` can change anything; RLS enforces that in the
+database, not just in the page. Auth emails go out through custom SMTP
+(Resend, `cotoaleksandra.com` domain): Authentication → Emails → SMTP Settings.
+Supabase's built-in mailer only delivers to members of the Supabase org.
+
+**Where things live**
+
+| what | where |
+|---|---|
+| page | `admin/index.html`, `admin/admin.js`, `admin/admin.css` |
+| desktop side | `desktop/desktop.js` ("folders from /admin/"), `desktop/desktop.css` |
+| tables | `desktop_folders`, `folder_items`, `folder_open_attempts` (`supabase/migrations/20261115120000_desktop_folders.sql`) |
+| images | private Storage bucket `desktop`, one folder per desktop folder id |
+| open a folder | edge function `open-folder` (JWT verification off): checks the password, rate-limits guesses (8 wrong per IP per folder per 15 min, 40 per folder), returns items with 30-minute signed image URLs |
+| set a password | edge function `folder-password` (JWT verification off, checks the caller is an admin itself): hashes with PBKDF2-SHA256, 310k rounds, random salt |
+
+Browsers can list folder names (that's what draws the icons) and read items
+of **open** folders. Nobody but the service role can read `password_hash`, and
+`locked`/`password_hash` can only change through `folder-password`.
+The hardcoded folders (Karol, demo, sari) are untouched and keep working if
+Supabase is down; DB folders just don't appear then.
+
+Edge functions are deployed by pasting `supabase/functions/<name>/index.ts`
+into the dashboard editor (Edge Functions → the function → Code → Deploy);
+there is no CLI here. SQL goes through the dashboard SQL editor; keep a copy of
+each migration in `supabase/migrations/`.
+
+**Adding another admin.** Two steps in the SQL editor:
+
+```sql
+-- 1. allow the address to change things
+insert into site_admins (email) values ('someone@example.com');
+```
+
+2. Give the address a login: sign-ups are off, so create it under
+Authentication → Users → Add user → *Send invitation* (or copy the `do $$`
+block in `supabase/migrations/20261115120100_admin_login_user.sql` with the new
+address). Removing someone: delete their `site_admins` row (and the user).

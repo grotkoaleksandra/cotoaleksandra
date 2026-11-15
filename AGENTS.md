@@ -44,17 +44,18 @@ logos/, work/         client logos and project images
 desktop.*, win98.css, home.* — earlier designs; no longer loaded
 desktop/              the intranet: a Windows 98 desktop (98.css) whose folders open small
                       sites; locked folders are encrypted (see "Desktop folders" below)
-styles.css            the original design; still used by admin/ and login/
+styles.css            the original design
+shared/config.js      Supabase URL + public anon key (no dependencies; desktop.js reads it)
 shared/supabase.js    the one client — import it, never build another
 shared/paths.js       site-root helper (the site lives at / and at /cotoaleksandra/)
 shared/auth.js        session helpers
 shared/projects-service.js   the work list
 shared/contact-service.js    the browser half of the contact form
 shared/page.js        wires the public page to Supabase when it's connected
-admin/                the back room: letters + work editor
-login/                Google sign-in
+admin/                Ola's admin (Win98 look): emailed-code login, makes /desktop folders
+login/                redirects to admin/
 supabase/migrations/  schema and RLS
-supabase/functions/   edge functions (contact-form)
+supabase/functions/   edge functions (contact-form, newsletter-signup, keepalive, open-folder, folder-password)
 ```
 
 ## House style
@@ -82,3 +83,10 @@ folder is an icon in `desktop/index.html`:
   browser; they run in a sandboxed iframe. Fine for prototypes, not for secrets;
   use real passwords.
 - Direct link to a folder: `cotoaleksandra.com/desktop/#<name>`.
+
+### Folders made in /admin/ (no code, no deploy)
+Ola can also make folders at `cotoaleksandra.com/admin/`: pictures, notes and
+links, open or password-locked. They live in Supabase (`desktop_folders`,
+`folder_items`, private bucket `desktop`) and desktop.js adds their icons after
+the hardcoded ones. Locked ones open through the `open-folder` edge function.
+Details: `docs/DEPLOY.md` → "Admin: desktop folders".
