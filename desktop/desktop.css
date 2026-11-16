@@ -1,6 +1,6 @@
 /* ============================================
    cotoaleksandra — the desktop intranet (Windows 95/98)
-   Lives at /desktop/, next to the portfolio. Folders open small sites in
+   The home page (index.html at the site root); /desktop/ redirects there. Folders open small sites in
    windows; locked folders ask for a password (desktop.js).
    98.css (loaded first) draws the real controls: windows, title bars,
    buttons, fields and the pixel MS Sans Serif. This file lays out the
@@ -291,6 +291,13 @@ html:not(.js) .window[data-window] { position: static; width: auto !important; m
   content: "↗"; position: absolute; left: -3px; bottom: -3px;
   width: 12px; height: 12px; background: #fff; border: 1px solid #000; font-size: 9px; line-height: 10px; text-align: center;
 }
+
+/* the portfolio shortcut is locked too; the badge sits on its corner */
+.icon__shortcut .icon__lock { right: -7px; bottom: -6px; }
+/* a cake for the birthday invite (a shortcut to another site) */
+.icon__shortcut--cake { background: none; border: 0; }
+.icon__shortcut--cake svg { display: block; width: 34px; height: 34px; }
+.icon__shortcut--cake::after { left: -1px; bottom: -1px; }
 
 /* a folder's window: address bar, the site in a frame, a status bar */
 .folderwin { height: min(600px, calc(100% - 20px)); }

@@ -2,13 +2,19 @@
 // A Windows 98 desktop. Each folder opens a small site in a window; locked
 // folders hold an encrypted page (tools/lock.mjs) that only opens with its
 // password, decrypted right here in the browser. Links like
-// cotoaleksandra.com/desktop/#demo open that folder straight away.
+// cotoaleksandra.com/#demo open that folder straight away. The desktop is
+// the home page (index.html at the site root); /desktop/ redirects there.
+//
+// The portfolio icon is special: it checks the password here, remembers it
+// for the session (shared/unlock.js) and goes to /portfolio/, which decrypts
+// and shows the real page.
 //
 // Folders made in /admin/ live in Supabase and are added after the hardcoded
 // icons (see "folders from /admin/" below). If Supabase is down, they simply
 // don't appear; everything hardcoded keeps working.
 
 import { SUPABASE_URL, SUPABASE_ANON_KEY, FUNCTIONS_URL } from '../shared/config.js';
+import { decrypt, fetchLock, portfolioPassword } from '../shared/unlock.js?v=1';
 
 document.documentElement.classList.add('js');
 
@@ -159,6 +165,7 @@ function folderWindow(icon) {
 
 function openFolder(icon) {
   const name = icon.dataset.folder;
+  if (icon.dataset.portfolio) { openPortfolio(icon); return; }
   if (icon.dataset.db) { openDbFolder(icon); return; }
   if (icon.dataset.lock && !unlocked.has(name)) { askPassword(icon); return; }
   const win = folderWindow(icon);
@@ -206,16 +213,22 @@ function askPassword(icon) {
 function closePassword() { pw.hidden = true; asking = null; }
 pw.querySelectorAll('[data-cancel]').forEach((b) => b.addEventListener('click', closePassword));
 
-const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
-async function decrypt(lock, password) {
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
-  const key = await crypto.subtle.deriveKey(
-    { name: 'PBKDF2', hash: 'SHA-256', salt: b64(lock.salt), iterations: lock.iterations },
-    base, { name: 'AES-GCM', length: 256 }, false, ['decrypt'],
-  );
-  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(lock.iv) }, key, b64(lock.ct));
-  return new TextDecoder().decode(plain);
+// ---- the portfolio: locked, opens full page at /portfolio/ ----
+// `section` = an old home-page anchor (#about, #contact…) to land on.
+let portfolioSection = '';
+function goToPortfolio(icon) {
+  history.replaceState(null, '', location.pathname + location.search);  // so Back doesn't bounce here again
+  location.href = icon.dataset.portfolio + (portfolioSection ? `#${portfolioSection}` : '');
 }
+function openPortfolio(icon) {
+  if (portfolioPassword.get()) { karolSays('off you go.'); goToPortfolio(icon); return; }
+  askPassword(icon);
+}
+const portfolioIcon = document.querySelector('.icon[data-portfolio]');
+document.querySelectorAll('[data-portfolio-link]').forEach((el) => el.addEventListener('click', (e) => {
+  e.preventDefault();
+  openPortfolio(portfolioIcon);
+}));
 
 pwForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -224,13 +237,21 @@ pwForm.addEventListener('submit', async (e) => {
   pwOk.disabled = true;
   pwError.textContent = 'Checking…';
   try {
+    if (icon.dataset.portfolio) {
+      await decrypt(await fetchLock(icon.dataset.lock), pwInput.value);   // throws if wrong
+      portfolioPassword.set(pwInput.value);
+      closePassword();
+      karolSays('you’re in. nice.');
+      goToPortfolio(icon);
+      return;
+    }
     if (icon.dataset.db) {
       const res = await openFolderFn(icon.dataset.folder, pwInput.value);
       if (res.status === 429) { pwError.textContent = 'Too many tries. Wait a few minutes.'; karolSays('easy. wait a bit.'); return; }
       if (!res.ok) throw new Error('denied');
       unlocked.set(icon.dataset.folder, await res.json());
     } else {
-      const lock = await (await fetch(icon.dataset.lock, { cache: 'no-store' })).json();
+      const lock = await fetchLock(icon.dataset.lock);
       unlocked.set(icon.dataset.folder, await decrypt(lock, pwInput.value));
     }
     closePassword();
@@ -268,10 +289,11 @@ const dog = document.getElementById('karolDog');
 const bubble = document.getElementById('karolSays');
 const pats = ['woof.', 'more pats please.', 'I guard the locked folders.', 'no, I don’t know the passwords.', 'good boy, that’s me.'];
 
-fetch('../karol.svg?v=1')
+const karolSvg = new URL('../karol.svg?v=1', import.meta.url).href;
+fetch(karolSvg)
   .then((r) => r.text())
   .then((svg) => { dog.innerHTML = svg; })
-  .catch(() => { dog.innerHTML = '<img src="../karol.svg?v=1" alt="" width="460" height="515">'; });
+  .catch(() => { dog.innerHTML = `<img src="${karolSvg}" alt="" width="460" height="515">`; });
 
 let quiet;
 function karolSays(text) { if (text) bubble.textContent = text; wake(); }
@@ -345,7 +367,7 @@ async function loadDbFolders() {
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const folders = await res.json();
-    const before = document.querySelector('.icons > a.icon');   // keep the portfolio shortcut last
+    const before = document.querySelector('.icons > .icon--shortcut');   // keep the shortcuts last
     folders.forEach((f) => {
       if (document.querySelector(`.icon[data-folder="${CSS.escape(f.slug)}"]`)) return;
       const icon = document.createElement('button');
@@ -432,7 +454,13 @@ function renderDbFolder(box, items) {
 
 // ---- start: the linked folder or window, or the read me ----
 windows().forEach((w) => { w.hidden = true; });
-const want = decodeURIComponent(location.hash.slice(1));
+let want = decodeURIComponent(location.hash.slice(1));
+// Links to the old home page's sections (#about, #contact…) now live in the
+// portfolio: ask for its password, then land on that section.
+if (['about', 'experience', 'work', 'tarocik', 'contact', 'top'].includes(want)) {
+  portfolioSection = want;
+  want = 'portfolio';
+}
 const findIcon = () => document.querySelector(`.icon[data-folder="${CSS.escape(want)}"]`);
 const dbReady = loadDbFolders();
 if (findIcon()) openFolder(findIcon());

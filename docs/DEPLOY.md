@@ -7,6 +7,18 @@ python3 -m http.server 8000
 Open `http://localhost:8000` — not the `file://` path, because the pages load
 ES modules.
 
+## The locked portfolio (added 2026-11-16)
+The home page is the desktop; the portfolio is encrypted at `/portfolio/`.
+After editing `_src/portfolio/index.html` (gitignored), re-lock and deploy:
+
+```bash
+tools/lock-portfolio.sh            # asks for the password (docs/CREDENTIALS.md)
+git add portfolio/portfolio.lock.json && git commit -m "Portfolio: update" && git push
+```
+
+The script refuses to finish if a phrase from the page shows up in
+any tracked file. More in AGENTS.md → "The portfolio".
+
 ## Frontend
 `.github/workflows/deploy.yml` publishes `main` to GitHub Pages on every push.
 
@@ -79,7 +91,7 @@ Only cotoaleksandra is active; uczta and burn-yer-boats were paused on
 ## Admin: desktop folders (added 2026-11-15)
 
 `/admin/` is a private Windows-98-style page (noindex) where Ola makes folders
-for `/desktop`. Changes show up on the desktop at once; no deploy needed.
+for the desktop (the home page; `/desktop/` redirects there). Changes show up on the desktop at once; no deploy needed.
 
 **Logging in.** Email link or code (Supabase Auth, passwordless). Sign-ups are
 **off**, so only accounts that already exist can ask for a code, and only

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Ola's portfolio, locked. The page itself is portfolio.lock.json (AES-GCM),
+       decrypted here in the browser with the password. Source: _src/portfolio/
+       (gitignored); re-lock with tools/lock-portfolio.sh. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>portfolio · cotoaleksandra</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/98.css@0.1.21/dist/98.css">
+  <link rel="stylesheet" href="../desktop/desktop.css?v=4">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.8em' x='10' font-size='80'>✳</text></svg>">
+  <style>
+    .desk { inset: 0; }
+    .lockpage__wait { position: absolute; left: 50%; top: 32%; transform: translate(-50%, -50%); color: #fff; }
+    html.is-opening #pw { display: none; }
+    html:not(.is-opening) .lockpage__wait { display: none; }
+  </style>
+  <script>try { if (sessionStorage.getItem('coto:portfolio')) document.documentElement.classList.add('is-opening'); } catch {}</script>
+</head>
+<body>
+  <main class="desk">
+    <p class="lockpage__wait">Opening…</p>
+    <section class="window dialog is-front" id="pw" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+      <div class="title-bar">
+        <div class="title-bar-text" id="pwTitle">Enter Password</div>
+        <div class="title-bar-controls"><button data-cancel aria-label="Close"></button></div>
+      </div>
+      <form class="window-body dialog__body" id="pwForm" autocomplete="off">
+        <div class="dialog__row">
+          <svg class="dialog__key" viewBox="0 0 32 32" aria-hidden="true"><circle cx="10" cy="16" r="6" fill="#ffd84a" stroke="#000" stroke-width="1.5"/><circle cx="8.5" cy="16" r="1.8" fill="#000"/><path d="M16 16h13v4h-3v-2h-2v3h-3v-3h-5z" fill="#ffd84a" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <div>
+            <p>Type the password for <b>portfolio</b>.</p>
+            <div class="field-row">
+              <label for="pwInput">Password:</label>
+              <input id="pwInput" type="password" required autofocus>
+            </div>
+            <p class="dialog__error" id="pwError" role="alert"></p>
+          </div>
+        </div>
+        <div class="dialog__buttons">
+          <button type="submit" id="pwOk">OK</button>
+          <button type="button" data-cancel>Cancel</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <noscript><p style="color:#fff;padding:16px">This page needs JavaScript. <a style="color:#fff" href="../">Back to the desktop</a>.</p></noscript>
+
+  <script type="module">
+    import { decrypt, fetchLock, portfolioPassword } from '../shared/unlock.js?v=1';
+
+    const pw = document.getElementById('pw');
+    const form = document.getElementById('pwForm');
+    const input = document.getElementById('pwInput');
+    const error = document.getElementById('pwError');
+    const ok = document.getElementById('pwOk');
+    const lockP = fetchLock('portfolio.lock.json');
+    const loaded = new Promise((r) => (document.readyState === 'complete' ? r() : addEventListener('load', r, { once: true })));
+
+    // Swap this page for the decrypted portfolio. document.write runs its
+    // scripts (page.js, the contact form, the newsletter) like a normal load,
+    // and relative links resolve from /portfolio/.
+    function render(html) {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      document.open();
+      document.write(html);
+      document.close();
+      // Land on #contact etc., again once styles and fonts are in and the layout is final.
+      const land = () => document.getElementById(hash)?.scrollIntoView({ behavior: 'instant' });
+      if (hash) {
+        land();
+        addEventListener('load', () => { land(); document.fonts.ready.then(land); }, { once: true });
+      }
+    }
+
+    async function tryOpen(password) {
+      const html = await decrypt(await lockP, password);
+      portfolioPassword.set(password);
+      await loaded;
+      render(html);
+    }
+
+    function ask() {
+      document.documentElement.classList.remove('is-opening');
+      input.focus();
+    }
+
+    const saved = portfolioPassword.get();
+    if (saved) tryOpen(saved).catch(() => { portfolioPassword.clear(); ask(); });
+    else ask();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.disabled = true;
+      error.textContent = 'Checking…';
+      try {
+        await tryOpen(input.value);
+      } catch {
+        error.textContent = 'Access denied. Wrong password.';
+        input.select();
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { pw.classList.remove('is-shaking'); void pw.offsetWidth; pw.classList.add('is-shaking'); }
+        ok.disabled = false;
+      }
+    });
+    pw.querySelectorAll('[data-cancel]').forEach((b) => b.addEventListener('click', () => { location.href = '../'; }));
+  </script>
+</body>
+</html>

@@ -145,7 +145,7 @@ async function showList() {
   $('mainTitle').textContent = 'Desktop folders';
   $('upBtn').hidden = true;
   $('newBtn').hidden = false;
-  $('viewLink').href = '../desktop/';
+  $('viewLink').href = '../';
   $('listView').hidden = false;
   $('folderView').hidden = true;
   status('Loading…');
@@ -298,7 +298,7 @@ async function openFolder(id) {
   if (error || !data) { status(error ? friendly(error) : 'That folder is gone.'); location.hash = ''; return; }
   current = data;
   $('mainTitle').textContent = `${data.name}`;
-  $('viewLink').href = `../desktop/#${data.slug}`;
+  $('viewLink').href = `../#${data.slug}`;
   $('fName').value = data.name;
   $('fSlug').value = data.slug;
   $('fKarol').value = data.karol || '';
@@ -328,7 +328,7 @@ $('settingsForm').addEventListener('submit', async (e) => {
   if (error) { say(msg, friendly(error), 'bad'); return; }
   Object.assign(current, patch);
   $('mainTitle').textContent = current.name;
-  $('viewLink').href = `../desktop/#${current.slug}`;
+  $('viewLink').href = `../#${current.slug}`;
   say(msg, 'Saved.', 'ok');
 });
 

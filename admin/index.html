@@ -56,7 +56,7 @@
       <div class="toolbar">
         <button id="upBtn" hidden>⬆ Up</button>
         <button id="newBtn">📁 New folder…</button>
-        <a class="button-link" href="../desktop/" target="_blank" rel="noopener" id="viewLink">View on desktop ↗</a>
+        <a class="button-link" href="../" target="_blank" rel="noopener" id="viewLink">View on desktop ↗</a>
         <span class="toolbar__gap"></span>
         <button id="logoutBtn">Log off</button>
       </div>
@@ -64,7 +64,7 @@
         <!-- folder list -->
         <div id="listView">
           <ul class="folders" id="folderList"></ul>
-          <p class="hint">These appear on <a href="../desktop/" target="_blank" rel="noopener">/desktop</a> straight away, after Karol, demo and sari (those stay as they are).</p>
+          <p class="hint">These appear on <a href="../" target="_blank" rel="noopener">the desktop</a> straight away, after Karol, demo and sari (those stay as they are).</p>
         </div>
 
         <!-- one folder -->
@@ -73,7 +73,7 @@
             <legend>Folder</legend>
             <form id="settingsForm" class="grid2">
               <div class="field-row-stacked"><label for="fName">Name</label><input id="fName" maxlength="60" required></div>
-              <div class="field-row-stacked"><label for="fSlug">Link: /desktop/#…</label><input id="fSlug" maxlength="40" pattern="[a-z0-9][a-z0-9\-]*" required></div>
+              <div class="field-row-stacked"><label for="fSlug">Link: cotoaleksandra.com/#…</label><input id="fSlug" maxlength="40" pattern="[a-z0-9][a-z0-9\-]*" required></div>
               <div class="field-row-stacked span2"><label for="fKarol">What Karol says when you point at it (optional)</label><input id="fKarol" maxlength="160"></div>
               <div class="buttons span2"><button type="submit">Save</button> <span class="msg" id="settingsMsg"></span></div>
             </form>
@@ -130,7 +130,7 @@
       </div>
       <form class="window-body stack" id="newForm">
         <div class="field-row-stacked"><label for="nName">Name</label><input id="nName" maxlength="60" required></div>
-        <div class="field-row-stacked"><label for="nSlug">Link: /desktop/#…</label><input id="nSlug" maxlength="40" pattern="[a-z0-9][a-z0-9\-]*" required></div>
+        <div class="field-row-stacked"><label for="nSlug">Link: cotoaleksandra.com/#…</label><input id="nSlug" maxlength="40" pattern="[a-z0-9][a-z0-9\-]*" required></div>
         <div class="field-row-stacked"><label for="nKarol">What Karol says (optional)</label><input id="nKarol" maxlength="160"></div>
         <div class="field-row"><input type="radio" id="nOpen" name="nKind" value="open" checked><label for="nOpen">Open: anyone with the link</label></div>
         <div class="field-row"><input type="radio" id="nLocked" name="nKind" value="locked"><label for="nLocked">Locked: needs a password</label></div>
@@ -143,7 +143,7 @@
   </main>
 
   <footer class="taskbar">
-    <a class="start" href="../desktop/"><span aria-hidden="true">✳</span> coto<b>aleksandra</b></a>
+    <a class="start" href="../"><span aria-hidden="true">✳</span> coto<b>aleksandra</b></a>
     <span class="taskbar__title">admin</span>
     <time class="taskbar__clock" id="clock"></time>
   </footer>

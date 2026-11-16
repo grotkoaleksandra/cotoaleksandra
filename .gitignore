@@ -6,3 +6,5 @@ docs/CREDENTIALS.md
 
 # Unencrypted sources of password-locked desktop folders: never publish these.
 desktop/_src/
+# Unencrypted source of the password-locked portfolio (see tools/lock-portfolio.sh).
+_src/
