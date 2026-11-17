@@ -61,6 +61,7 @@ function showWindow(win) {
 }
 
 function closeWindow(win) {
+  if (win.contains(document.activeElement)) document.activeElement.blur();   // e.g. its frame, after Escape
   win.hidden = true;
   win.classList.remove('is-front');
   const next = windows().filter((w) => !w.hidden).sort((a, b) => b.style.zIndex - a.style.zIndex)[0];
@@ -89,13 +90,16 @@ function wireWindow(win) {
       win.style.left = `${Math.min(Math.max(ev.clientX - startX, -win.offsetWidth + 80), desk.clientWidth - 60)}px`;
       win.style.top = `${Math.min(Math.max(ev.clientY - startY, 0), desk.clientHeight - 30)}px`;
     };
+    // End the drag however the pointer goes away (a cancelled touch or lost
+    // capture too), or the window keeps following the pointer.
+    const ends = ['pointerup', 'pointercancel', 'lostpointercapture'];
     const up = () => {
       win.querySelectorAll('iframe').forEach((f) => { f.style.pointerEvents = ''; });
       bar.removeEventListener('pointermove', move);
-      bar.removeEventListener('pointerup', up);
+      ends.forEach((t) => bar.removeEventListener(t, up));
     };
     bar.addEventListener('pointermove', move);
-    bar.addEventListener('pointerup', up);
+    ends.forEach((t) => bar.addEventListener(t, up));
   });
 }
 windows().forEach(wireWindow);
@@ -152,7 +156,15 @@ function folderWindow(icon) {
   win.querySelector('.title-bar-text').textContent = icon.dataset.title;
   win.querySelector('.folderwin__addr input').value = `${location.origin}${location.pathname}#${name}`;
   if (db) win.classList.add('folderwin--db');
-  else win.querySelector('iframe').title = icon.dataset.title;
+  else {
+    const frame = win.querySelector('iframe');
+    frame.title = icon.dataset.title;
+    // Keys pressed inside the folder's page never reach this document, so
+    // Escape there would do nothing. Same-origin pages: listen in them.
+    frame.addEventListener('load', () => {
+      try { frame.contentWindow.addEventListener('keydown', (e) => { if (e.key === 'Escape') onEscape(); }); } catch { /* sandboxed: see FRAME_ESC */ }
+    });
+  }
   const [left, right] = win.querySelectorAll('.status-bar-field');
   left.textContent = locked ? 'Unlocked folder' : 'Folder';
   right.textContent = locked ? '🔒 private' : 'public';
@@ -174,7 +186,7 @@ function openFolder(icon) {
     if (icon.dataset.lock) {
       // Decrypted pages run sandboxed, in their own opaque origin.
       frame.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-modals');
-      frame.srcdoc = unlocked.get(name);
+      frame.srcdoc = unlocked.get(name) + FRAME_ESC;
     } else {
       frame.src = icon.dataset.src;
     }
@@ -190,6 +202,13 @@ function openFull(icon) {
   window.open(url, '_blank', 'noopener');
   setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
+
+// Sandboxed (decrypted) pages run in their own origin, so they tell us
+// about Escape themselves.
+const FRAME_ESC = `<script>addEventListener('keydown',function(e){if(e.key==='Escape')parent.postMessage('desktop:escape','*')})<\/script>`;
+addEventListener('message', (e) => {
+  if (e.data === 'desktop:escape' && [...document.querySelectorAll('.folderwin iframe')].some((f) => f.contentWindow === e.source)) onEscape();
+});
 
 // ---- the password dialog ----
 const pw = document.getElementById('pw');
@@ -275,13 +294,13 @@ document.querySelectorAll('.icon[data-folder]').forEach((icon) => {
 });
 
 // Escape closes the password box, the Start menu, or the window on top.
-document.addEventListener('keydown', (e) => {
-  if (e.key !== 'Escape') return;
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') onEscape(); });
+function onEscape() {
   if (!pw.hidden) { closePassword(); return; }
   if (!startMenu.hidden) { toggleStart(false); startButton.focus(); return; }
   const topWin = windows().filter((w) => !w.hidden).sort((a, b) => b.style.zIndex - a.style.zIndex)[0];
   if (topWin) closeWindow(topWin);
-});
+}
 
 // ---- Karol, the assistant ----
 const karol = document.getElementById('karol');

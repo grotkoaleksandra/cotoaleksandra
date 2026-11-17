@@ -101,7 +101,13 @@ ul { padding: 0; list-style: none; }
 .window--wide { width: min(700px, calc(100vw - 24px)) !important; }
 .window[hidden] { display: none !important; }
 .window:not(.is-front) .title-bar { background: linear-gradient(90deg, #808080, #b5b5b5); }  /* inactive window */
-.title-bar { cursor: default; user-select: none; touch-action: none; flex: none; }
+.title-bar { cursor: default; -webkit-user-select: none; user-select: none; touch-action: none; flex: none; }
+/* 98.css draws 16x14px title-bar buttons: fine for a mouse, too small for a
+   finger. On touch screens they grow (same pixel icons, centred) and spread out. */
+@media (pointer: coarse) {
+  .title-bar-controls { gap: 6px; }
+  .title-bar-controls button { min-width: 30px; min-height: 24px; background-position: center !important; margin-left: 0 !important; }
+}
 .window-body { flex: 1 1 auto; overflow: auto; padding: 14px 16px 18px; background: #fff; box-shadow: var(--sunken); margin: 3px; }
 
 /* read me */
@@ -260,6 +266,9 @@ html:not(.js) .window[data-window] { position: static; width: auto !important; m
   .about { grid-template-columns: 1fr; }
   .about__karol { width: 60%; margin: 0 auto; }
   .karol { position: fixed; left: auto !important; top: auto !important; right: 10px; bottom: calc(var(--taskbar-h) + 10px) !important; width: 90px; }
+  /* Windows already fill the screen here, so "open full screen" (a new tab)
+     only sat 2px from the X, where a thumb meant for X landed on it. */
+  .title-bar-controls [data-full] { display: none; }
   .taskbar__tray a { display: none; }
   .taskbar__windows button { flex-basis: 110px; }
 }
